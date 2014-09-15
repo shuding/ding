@@ -1,0 +1,335 @@
+/*
+* This is the UI controller CSS file of Ding.app
+* Create by quietshu@gmail.com at 2014.9.14
+* */
+@font-face {
+  font-family: "cookie";
+  src: url(./../font/Cookie-Regular.ttf);
+}
+* {
+  -webkit-user-select: none;
+}
+body, #content, .fullsize {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-font-smoothing: auto;
+  font-family: 'Lucida Grande', 'Segoe UI', Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+.drop_shadow {
+  background: rgba(255, 255, 255, 0.15);
+}
+body {
+  overflow: hidden;
+  max-width: 600px;
+  max-height: 400px;
+  overflow: hidden;
+}
+#content {
+  background: #001F3F;
+  color: #fff;
+  overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6, a, p, span, i, b, ul, li {
+  margin: 0;
+  padding: 0;
+  cursor: default;
+}
+ul {
+  list-style: none;
+}
+h1#logo {
+  position: absolute;
+  display: block;
+  left: 0;
+  right: 0;
+  width: 150px;
+  height: 80px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  text-align: center;
+  line-height: 80px;
+  font-size: 50px;
+  font-family: cookie;
+  font-weight: 100;
+  z-index: 1;
+}
+h1#logo span {
+  display: inline-block;
+  opacity: 0;
+}
+#content #background {
+  top: 100%;
+  background: #fff;
+}
+h1#logo.fix {
+  width: 100px;
+  height: 50px;
+  right: inherit;
+  bottom: inherit;
+  font-size: 26px;
+  letter-spacing: 2px;
+  line-height: 50px;
+}
+h1#logo.fix span {
+  -webkit-transform: none;
+  color: #001F3F;
+}
+nav#navigation {
+  position: absolute;
+  width: 90px;
+  height: 350px;
+  left: 5px;
+  bottom: 0;
+  visibility: hidden;
+  overflow-y: scroll;
+}
+nav#navigation.play {
+  visibility: visible;
+}
+.scrollbar_container {
+  z-index: 1;
+  overflow-y: scroll;
+  cursor: pointer;
+}
+.scrollbar_container::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar {
+  position: absolute;
+  width: 1px;
+  height: 850px;
+}
+ul#nav_list {
+  /* use GPU render */
+  webkit-transform: translate3d(0, 0, 0);
+  overflow: hidden;
+}
+ul#nav_list li {
+  position: relative;
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 3px auto;
+  font-size: 13px;
+  line-height: 13px;
+  background: #001F3F;
+  overflow: hidden;
+  cursor: pointer;
+}
+ul#nav_list li.list_end {
+  background: transparent;
+  color: #001F3F;
+  cursor: default;
+}
+ul#nav_list li span {
+  position: absolute;
+  width: 57px;
+  right: 6px;
+  bottom: 8px;
+  text-align: right;
+  word-wrap: break-word;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+}
+ul#nav_list li.list_end span {
+  top: 10px;
+  bottom: inherit;
+  text-align: center;
+  cursor: default;
+}
+#tableview {
+  position: absolute;
+  left: 100px;
+  top: 0;
+  width: 400px;
+  height: 400px;
+  background: #F5F5F5;
+  visibility: hidden;
+}
+#tableview.play {
+  visibility: visible;
+}
+#left_cover_list, #right_cover_list {
+  position: absolute;
+  display: block;
+  width: 200px;
+  height: 400px;
+  top: 0;
+  overflow: hidden;
+}
+#left_cover_list {
+  left: 0;
+}
+#right_cover_list {
+  left: 200px;
+}
+li.song_cover {
+  display: block;
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+}
+#tabbar {
+  position: absolute;
+  width: 100px;
+  height: 350px;
+  top: 50px;
+  right: 0;
+  visibility: hidden;
+}
+#tabbar.play {
+  visibility: visible;
+}
+#tabbar .tabbar_icon {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 87.5px;
+  text-align: center;
+}
+#tabbar .tabbar_icon span {
+  position: absolute;
+  display: block;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  height: 70px;
+  margin: auto;
+  line-height: 70px;
+  color: #001F3F;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#tabbar .tabbar_icon.active span, #tabbar .tabbar_icon.active span {
+  background: #001F3F;
+}
+#tabbar .tabbar_icon.active path, #tabbar .tabbar_icon.active path, #tabbar .tabbar_icon.active text {
+  fill: #fff;
+}
+#control_btns {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100px;
+  height: 30px;
+  color: #001F3F;
+}
+#control_btns div {
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  line-height: 30px;
+}
+#control_btns svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+#control_btns #mute_btn {
+  left: 0;
+}
+#control_btns #close_btn {
+  right: 0;
+}
+#control_btns #mute_btn svg {
+  width: 34px;
+  height: 32px;
+}
+#control_btns #close_btn svg {
+  width: 32px;
+  height: 32px;
+}
+#control_btns #mute_btn path {
+  visibility: hidden;
+}
+#control_btns #mute_btn path#sound_full {
+  visibility: visible;
+}
+#content #background.blur_bg {
+  opacity: 0;
+  top: 0;
+  -webkit-filter: blur(15px);
+  -webkit-transform: scale(1.2, 1.2);
+  background-color: rgba(255, 255, 255, 0.15);
+  background-size: 300px;
+  background-position: center center;
+  background-blend-mode: soft-light;
+}
+#play_btn svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#play_btn svg path {
+  opacity: 1;
+  -webkit-transform: scale(1, 1) rotateZ(0);
+}
+.playing-false #pause_icon {
+  -webkit-transform: scale(0, 0) rotateZ(30deg);
+  opacity: 0;
+}
+.playing-true #play_icon {
+  -webkit-transform: scale(0, 0) rotateZ(30deg);
+  opacity: 0;
+}
+#prev_next_btn svg {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+}
+.active_prev_btn #prev_btn path {
+  fill: #fff;
+}
+.active_prev_btn #next_btn path {
+  fill: #001F3F;
+}
+.active_prev_btn #prev_btn {
+  width: 100%;
+  margin-left: 0;
+}
+.active_next_btn #next_btn {
+  width: 100%;
+}
+.active_next_btn #next_btn path {
+  fill: #fff;
+}
+.active_next_btn #prev_btn {
+  margin-left: -50%;
+}
+.active_next_btn #prev_btn path {
+  fill: #001F3F;
+}
+#play_mode_btn svg {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  -webkit-transform: translateZ(0) scale(1, 1) rotateZ(0);
+}
+#tabbar .tabbar_icon span#song_info span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  line-height: 20px;
+  font-size: 13px;
+  overflow-x: scroll;
+}
+#tabbar .tabbar_icon span#song_info span::-webkit-scrollbar {
+  display: none;
+}
+#song_info_title {
+  font-weight: 900;
+}
