@@ -6,6 +6,10 @@ var ui = {
     /* controll function timing */
     wait_time: 0,
     music_info_interval: null,
+    height: 0,
+    expanded: false,
+    expand_id: 0,
+    last_scroll_pos: 0,
     clear_wait: function () {
         ui.wait_time = 0;
         return ui;
@@ -18,8 +22,8 @@ var ui = {
     logo_animation: function () {
         setTimeout(function () {
             $("#logo").addClass("play");
-            var logo_sound = new Audio('./sound/logo.wav');
-            logo_sound.play();
+            //var logo_sound = new Audio('./sound/logo.wav');
+            //logo_sound.play();
         }, ui.wait_time);
         return ui;
     },
@@ -70,7 +74,7 @@ var ui = {
                     }
                     else {
                         if (i <= last_scroll_pos + 4)
-                            delay = (last_scroll_pos + 4 - i) * 50;
+                            delay = (ui.last_scroll_pos + 4 - i) * 50;
                         else
                             delay = 0;
                     }
@@ -96,6 +100,7 @@ var ui = {
             else
                 $("#left_cover_list").append(cover_element);
         }
+        ui.height = musics.length / 2;
         setTimeout(function () {
             $("#tableview").addClass("play");
             var left_covers = $("#left_cover_list .song_cover"),
@@ -118,29 +123,30 @@ var ui = {
             }
 
             /* scroll effect */
-            var left_lis = $("#left_cover_list .song_cover"),
-                right_lis = $("#right_cover_list .song_cover");
-            var last_scroll_pos = 0;
+            ui.last_scroll_pos = 0;
             var height = $("#left_cover_list")[0].scrollHeight - 400;
             var inner_scroll_top;
-            var scroll_animation = function () {
+            ui.scroll_animation = function () {
                 var scroll_dis = $(this).scrollTop();
-                var pos = Math.floor(($(this).scrollTop() / 450.) * (left_covers.length - 2));
+                var pos = Math.floor(($(this).scrollTop() / 450.) * (ui.height - 2));
                 inner_scroll_top = pos * 200;
-                if(pos == last_scroll_pos)
+                if(pos == ui.last_scroll_pos)
                     return;
+                var delta = 0;
                 for(var i = 0; i < left_covers.length; ++i) {
                     var li = left_covers[i];
                     var delay = 0;
-                    if(pos > last_scroll_pos) {
-                        if (i >= last_scroll_pos)
-                            delay = (i - last_scroll_pos) * 80;
+                    if($(li).attr("data-delay-delta"))
+                        delta = (+$(li).attr("data-delay-delta"));
+                    if(pos > ui.last_scroll_pos) {
+                        if (i + delta >= ui.last_scroll_pos)
+                            delay = (i + delta - ui.last_scroll_pos) * 80;
                         else
                             delay = 0;
                     }
                     else {
-                        if (i <= last_scroll_pos + 4)
-                            delay = (last_scroll_pos + 4 - i) * 80;
+                        if (i + delta <= ui.last_scroll_pos + 4)
+                            delay = (ui.last_scroll_pos + 4 - i - delta) * 80;
                         else
                             delay = 0;
                     }
@@ -148,18 +154,21 @@ var ui = {
                         $(li).css("-webkit-transform", "translateY(-" + inner_scroll_top + "px) translateZ(0)");
                     }, delay, li);
                 }
+                delta = 0;
                 for(var i = 0; i < right_covers.length; ++i) {
                     var li = right_covers[i];
                     var delay = 0;
-                    if(pos > last_scroll_pos) {
-                        if (i >= last_scroll_pos)
-                            delay = (i - last_scroll_pos) * 80;
+                    if($(li).attr("data-delay-delta"))
+                        delta = (+$(li).attr("data-delay-delta"));
+                    if(pos > ui.last_scroll_pos) {
+                        if (i + delta >= ui.last_scroll_pos)
+                            delay = (i + delta - ui.last_scroll_pos) * 80;
                         else
                             delay = 0;
                     }
                     else {
-                        if (i <= last_scroll_pos + 4)
-                            delay = (last_scroll_pos + 4 - i) * 80;
+                        if (i + delta <= ui.last_scroll_pos + 4)
+                            delay = (ui.last_scroll_pos + 4 - i - delta) * 80;
                         else
                             delay = 0;
                     }
@@ -167,12 +176,35 @@ var ui = {
                         $(li).css("-webkit-transform", "translateY(-" + inner_scroll_top + "px) translateZ(0)");
                     }, delay + 80, li);
                 }
-                last_scroll_pos = pos;
+                ui.last_scroll_pos = pos;
             };
-            $("#tableview_scrollbar_container").scroll(scroll_animation).mousedown(function (event) {
-                var pos = Math.floor(event.pageY / 200) + last_scroll_pos;
+            $("#tableview_scrollbar_container").scroll(ui.scroll_animation).mousedown(function (event) {
+                var pos = Math.floor(event.pageY / 200) + ui.last_scroll_pos;
                 var pos_x = (event.pageX < 300) ? 0 : 1;
                 var no = pos * 2 + pos_x;
+                if(ui.expanded) {
+                    var expand_line =  Math.floor(ui.expand_id / 2);
+                    if (expand_line <= pos) {
+                        if (pos == expand_line) {
+                            if (pos_x != (ui.expand_id % 2)) {
+                                if(pos_x % 2 == 0)
+                                    no += 1;
+                                else
+                                    no -= 1;
+                            }
+                        }
+                        else if (pos == expand_line + 1 && pos_x != (ui.expand_id % 2)) {
+                            if (ui.expand_id % 2 == 1)
+                                no -= 1;
+                            else
+                                no -= 3;
+                        }
+                        else if (pos_x == (ui.expand_id % 2))
+                            no -= 2;
+                        else
+                            no -= 4;
+                    }
+                }
                 $("#song_cover_" + no).addClass("pressdown");
                 setTimeout(function () {
                     $("#song_cover_" + no).removeClass("pressdown");
@@ -182,23 +214,179 @@ var ui = {
                     event.preventDefault();
                     return;
                 }
-                var pos = Math.floor(event.pageY / 200) + last_scroll_pos;
+                var pos = Math.floor(event.pageY / 200) + ui.last_scroll_pos;
                 var pos_x = (event.pageX < 300) ? 0 : 1;
                 var no = pos * 2 + pos_x;
-                content().change_play_no(no);
-                ui.change_app_background(musics[no].picture);
+                if(ui.expanded) {
+                    var expand_line =  Math.floor(ui.expand_id / 2);
+                    if (expand_line <= pos) {
+                        if (pos == expand_line) {
+                            if (pos_x != (ui.expand_id % 2)) {
+                                if(pos_x % 2 == 0)
+                                    no += 1;
+                                else
+                                    no -= 1;
+                            }
+                        }
+                        else if (pos == expand_line + 1 && pos_x != (ui.expand_id % 2)) {
+                            if (ui.expand_id % 2 == 1)
+                                no -= 1;
+                            else
+                                no -= 3;
+                        }
+                        else if (pos_x == (ui.expand_id % 2))
+                            no -= 2;
+                        else
+                            no -= 4;
+                    }
+                }
+                if(content().change_play_no(no)) {
+                    if(ui.expanded)
+                        ui.back_to_default_cover();
+                    ui.expand_cover(no);
+                    ui.change_app_background(musics[no].picture);
+                }
+                else {
+                    if(ui.expanded)
+                        ui.back_to_default_cover();
+                    else {
+                        ui.expand_cover(no);
+                    }
+                }
             });
 
         }, ui.wait_time);
         return ui;
     },
-    scroll_to_id: function (id) {
-        var pos = Math.floor(id / 2);
+    scroll_to_pos: function (pos) {
+        if(pos == ui.last_scroll_pos)
+            return ui;
+        $("#tableview_scrollbar_container").scrollTop(Math.floor(450 * (pos + 1) / (ui.height - 2)));
+        var inner_scroll_top = pos * 200;
+        var delta = 0;
+        var left_covers = $("#left_cover_list .song_cover"),
+            right_covers = $("#right_cover_list .song_cover");
+        for(var i = 0; i < left_covers.length; ++i) {
+            var li = left_covers[i];
+            var delay = 0;
+            if($(li).attr("data-delay-delta"))
+                delta = (+$(li).attr("data-delay-delta"));
+            if(pos > ui.last_scroll_pos) {
+                if (i + delta >= ui.last_scroll_pos)
+                    delay = (i + delta - ui.last_scroll_pos) * 80;
+                else
+                    delay = 0;
+            }
+            else {
+                if (i + delta <= ui.last_scroll_pos + 4)
+                    delay = (ui.last_scroll_pos + 4 - i - delta) * 80;
+                else
+                    delay = 0;
+            }
+            setTimeout(function (li) {
+                $(li).css("-webkit-transform", "translateY(-" + inner_scroll_top + "px) translateZ(0)");
+            }, delay, li);
+        }
+        delta = 0;
+        for(var i = 0; i < right_covers.length; ++i) {
+            var li = right_covers[i];
+            var delay = 0;
+            if($(li).attr("data-delay-delta"))
+                delta = (+$(li).attr("data-delay-delta"));
+            if(pos > ui.last_scroll_pos) {
+                if (i + delta >= ui.last_scroll_pos)
+                    delay = (i + delta - ui.last_scroll_pos) * 80;
+                else
+                    delay = 0;
+            }
+            else {
+                if (i + delta <= ui.last_scroll_pos + 4)
+                    delay = (ui.last_scroll_pos + 4 - i - delta) * 80;
+                else
+                    delay = 0;
+            }
+            setTimeout(function (li) {
+                $(li).css("-webkit-transform", "translateY(-" + inner_scroll_top + "px) translateZ(0)");
+            }, delay + 80, li);
+        }
+        ui.last_scroll_pos = pos;
+        return ui;
+    },
+    /* expand the song cover animation */
+    back_to_default_cover: function () {
+        if(!ui.expanded)
+            return false;
+        ui.expanded = false;
+        var left_lis = $("#left_cover_list .song_cover"),
+            right_lis = $("#right_cover_list .song_cover");
+        $("#cover_control_icons").removeClass("play");
+        if(ui.expand_id % 2) {
+            var left_pos = Math.floor(ui.expand_id / 2);
+            var right_pos = left_pos + 1;
+            $(right_lis[left_pos]).removeClass("expand");
+            if(right_pos < right_lis.length)
+                $(right_lis[right_pos]).attr("data-delay-delta", "0");
+            if(left_pos < left_lis.length)
+                $(left_lis[left_pos]).css("margin-top", "0").attr("data-delay-delta", "0");
+        }
+        else {
+            var right_pos = Math.floor(ui.expand_id / 2);
+            var left_pos = right_pos + 1;
+            $(left_lis[right_pos]).removeClass("expand");
+            if(left_pos < left_lis.length)
+                $(left_lis[left_pos]).attr("data-delay-delta", "0");
+            if(right_pos < right_lis.length)
+                $(right_lis[right_pos]).css("margin-top", "0").attr("data-delay-delta", "0");
+        }
+        ui.height = left_lis.length;
+        return true;
+    },
+    expand_cover: function (id) {
+        var left_lis = $("#left_cover_list .song_cover"),
+            right_lis = $("#right_cover_list .song_cover");
+        $("#cover_control_icons").addClass("play");
+        var left_pos, right_pos;
+        if(id % 2) {
+            left_pos = Math.floor(id / 2);
+            right_pos = left_pos + 1;
+            $(right_lis[left_pos]).addClass("expand");
+            if(right_pos < right_lis.length)
+                $(right_lis[right_pos]).attr("data-delay-delta", "1");
+            if(left_pos < left_lis.length)
+                $(left_lis[left_pos]).css("margin-top", "400px").attr("data-delay-delta", "2");
+            ui.height = left_lis.length + 2;
+        }
+        else {
+            right_pos = Math.floor(id / 2);
+            left_pos = right_pos + 1;
+            $(left_lis[right_pos]).addClass("expand");
+            if(left_pos < left_lis.length)
+                $(left_lis[left_pos]).attr("data-delay-delta", "1");
+            if(right_pos < right_lis.length)
+                $(right_lis[right_pos]).css("margin-top", "400px").attr("data-delay-delta", "2");
+            ui.height = right_lis.length + 2;
+        }
+        if(Math.floor(id / 2) != ui.last_scroll_pos) {
+            setTimeout(function () {
+                ui.scroll_to_pos(Math.floor(id / 2));
+            }, 500);
+        }
+// TODO:        $("#song_cover_" + id).html('<div id="song_progress_bar"><span id="song_progress_bar_inner"></span></div>');
+        ui.expanded = true;
+        ui.expand_id = id;
+        return ui;
     },
     /* tabbar load animation */
     tabbar_load: function () {
         setTimeout(function () {
             $("#tabbar").addClass("play");
+            /*
+            $("#play_btn, #prev_next_btn, #play_mode_btn").mouseenter(function () {
+                $(this).addClass("hover");
+            }).mouseleave(function () {
+                $(this).removeClass("hover");
+            });
+            */
             $("#play_btn").mousedown(function (event) {
                 var btn_parent = $($(".tabbar_icon")[0]);
                 btn_parent.addClass("active").attr("data-active", "true");
@@ -278,6 +466,34 @@ var ui = {
                     return;
                 }
                 content().change_play_mode();
+            });
+            $("#song_info").mousedown(function (event) {
+                var btn_parent = $($("#tabbar .tabbar_icon")[3]);
+                btn_parent.addClass("active").attr("data-active", "true");
+                setTimeout(function () {
+                    if (btn_parent.attr("data-active") == "delay") {
+                        btn_parent.removeClass("active").attr("data-active", "false");
+                        return;
+                    }
+                    btn_parent.attr("data-active", "false");
+                }, 500);
+            }).mouseup(function (event) {
+                var btn_parent = $($("#tabbar .tabbar_icon")[3]);
+                if(btn_parent.attr("data-active") == "true") {
+                    btn_parent.attr("data-active", "delay");
+                    return;
+                }
+                btn_parent.removeClass("active").attr("data-active", "false");
+            }).mouseleave(function (event) {
+                var btn_parent = $($("#tabbar .tabbar_icon")[3]);
+                btn_parent.removeClass("active").attr("data-active", "false");
+            }).click(function (event) {
+                if(moved) {
+                    event.preventDefault();
+                    return;
+                }
+                if(music_playing)
+                    ui.scroll_to_pos(Math.floor(musics.indexOf(music_now) / 2));
             });
         }, ui.wait_time);
         return ui;

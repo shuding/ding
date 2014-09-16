@@ -126,7 +126,7 @@ ul#nav_list li.scroll {
 ul#left_cover_list li, ul#right_cover_list li {
   opacity: 1;
   -webkit-transform: translateX(0) scale(1, 1);
-  -webkit-transition: -webkit-transform .8s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .8s ease;
+  -webkit-transition: -webkit-transform .8s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .8s ease, margin-top .8s ease, margin-left .8s ease, width .8s ease, height .8s ease;
 }
 ul#left_cover_list li.hide, ul#right_cover_list li.hide {
   -webkit-transform: translateY(300px) scale(.8, .8) translateZ(0);
@@ -149,7 +149,7 @@ ul#left_cover_list li.hide, ul#right_cover_list li.hide {
   opacity: 1;
 }
 #tabbar .tabbar_icon span {
-  -webkit-transition: background .3s ease;
+  -webkit-transition: background .3s ease, color .3s ease;
 }
 #control_btns div {
   -webkit-transition: background .2s ease, -webkit-transform .3s cubic-bezier(.85,-0.19,.58,1.67);

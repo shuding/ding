@@ -9,7 +9,7 @@ var musics = [
         picture: "./img/cover/0.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/James\ Blunt/Moon\ Landing\ \(Deluxe\ Edition\)/13\ Kiss\ This\ Love\ Goodbye.m4a",
         company: "Erased Tapes Records",
         title: "Kiss This Love Goodbye",
         rating_avg: 4.46059,
@@ -28,7 +28,7 @@ var musics = [
         picture: "./img/cover/1.jpg",
         ssid: "8074",
         artist: "Taylor Swift",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Taylor\ Swift/Red/02\ Red.m4a",
         company: "Erased Tapes Records",
         title: "Red",
         rating_avg: 4.46059,
@@ -47,7 +47,7 @@ var musics = [
         picture: "./img/cover/2.jpg",
         ssid: "8074",
         artist: "Westlift",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "Greatest Hits",
         rating_avg: 4.46059,
@@ -66,7 +66,7 @@ var musics = [
         picture: "./img/cover/3.jpg",
         ssid: "8074",
         artist: "Coldplay",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "Ghost Stories",
         rating_avg: 4.46059,
@@ -85,7 +85,7 @@ var musics = [
         picture: "./img/cover/4.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -104,7 +104,7 @@ var musics = [
         picture: "./img/cover/5.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -123,7 +123,7 @@ var musics = [
         picture: "./img/cover/6.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -142,7 +142,7 @@ var musics = [
         picture: "./img/cover/7.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -161,7 +161,7 @@ var musics = [
         picture: "./img/cover/8.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -180,7 +180,7 @@ var musics = [
         picture: "./img/cover/9.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -199,7 +199,7 @@ var musics = [
         picture: "./img/cover/10.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -218,7 +218,7 @@ var musics = [
         picture: "./img/cover/0.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -237,7 +237,7 @@ var musics = [
         picture: "./img/cover/1.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -256,7 +256,7 @@ var musics = [
         picture: "./img/cover/2.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -275,7 +275,7 @@ var musics = [
         picture: "./img/cover/3.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -294,7 +294,7 @@ var musics = [
         picture: "./img/cover/4.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -313,7 +313,7 @@ var musics = [
         picture: "./img/cover/5.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -332,7 +332,7 @@ var musics = [
         picture: "./img/cover/6.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -351,7 +351,7 @@ var musics = [
         picture: "./img/cover/7.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -370,7 +370,7 @@ var musics = [
         picture: "./img/cover/8.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -389,7 +389,7 @@ var musics = [
         picture: "./img/cover/9.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -408,7 +408,7 @@ var musics = [
         picture: "./img/cover/10.jpg",
         ssid: "8074",
         artist: "James Blunt",
-        url: "http:\/\/mr4.douban.com\/201309301009\/58419e1d4dfc45d9ff800b559839ff56\/view\/song\/small\/p1639693.mp3",
+        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
         company: "Erased Tapes Records",
         title: "The Only One",
         rating_avg: 4.46059,
@@ -425,6 +425,7 @@ var musics = [
 ];
 var window_pos = [], drag_pos = [], on_drag = false, moved = false;
 var music_playing = false, play_mode = 0, music_now = {};
+var music_audio_object = null;
 var content_scope;
 
 var app = angular.module("ding", [], function($httpProvider) {
@@ -487,19 +488,22 @@ function content($scope) {
     }
 
     var load_func = function () {
-        // load musics and init model
-        change_play_no_func(0);
+        // init model
+        music_audio_object = new Audio("");
 
         // load UI
         ui.clear_wait().logo_animation().wait(2300).background_animation().wait(400).logo_fix_animation()
             .wait(200).navigation_load().wait(200).tableview_load(musics).wait(400).tabbar_load()
             .wait(200).control_btn_load().set_app_background(musics[0].picture);
 
-        // start play music automatic
-        content().toggle_play();
+        // play music automatic
+        setTimeout(function () {
+            ui.expand_cover(0);
+            change_play_no_func(0);
+        }, ui.wait_time + 400);
     };
     var drag_func = function () {
-        if(!MacGap)
+        if(MacGap === undefined)
             return;
         window_pos = [MacGap.Window.x, MacGap.Window.y];
         $(document).mousedown(function (event) {
@@ -521,9 +525,24 @@ function content($scope) {
             }
         });
     };
+    var load_music = function (no) {
+        //setTimeout(function () {
+
+        music_audio_object.src = musics[no].url;
+        music_audio_object.play();
+
+        music_playing = true;
+        content_scope.playing = music_playing;
+        content_scope.$apply();
+        //}, 800);
+    };
     var toggle_play_func = function () {
         music_playing = !music_playing;
         content_scope.playing = music_playing;
+        if(music_playing)
+            music_audio_object.play();
+        else
+            music_audio_object.pause();
         content_scope.$apply();
         if(music_playing)
             ui.clear_wait().music_info_animation();
@@ -534,10 +553,16 @@ function content($scope) {
         content_scope.$apply();
     };
     var change_play_no_func = function (no) {
+        if(music_now === musics[no])
+            return false;
         music_now = musics[no];
         content_scope.music_now = music_now;
+        music_playing = false;
+        content_scope.playing = music_playing;
+        load_music(no);
         content_scope.$apply();
         ui.clear_wait().music_info_animation();
+        return true;
     };
 
     var ret_obj = {
