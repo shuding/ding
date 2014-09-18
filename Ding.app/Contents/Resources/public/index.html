@@ -7,38 +7,26 @@
   <link rel="stylesheet" href="css/ding-ui.css">
   <script src="js/jquery-2.1.1.min.js"></script>
   <script src="js/angular.min.js"></script>
+  <script src="js/ding-network.js"></script>
   <script src="js/ding-ui.js"></script>
   <script src="js/ding-controller.js"></script>
   <script src="js/ding-main.js"></script>
 </head>
 <body ng-controller="content">
   <div id="content">
-    <h1 id="logo"><span>D</span><span>i</span><span>n</span><span>g</span></h1>
+    <h1 id="logo"><span>D</span><span>i</span><span>n</span><span>g</span>
+      <form id="login_form">
+        <input type="email" placeholder="your email">
+        <input type="password" placeholder="your password">
+        <button>login</button>
+      </form>
+    </h1>
     <div id="background" class="fullsize"></div>
     <nav id="navigation">
       <div id="scrollbar_container" class="fullsize scrollbar_container">
         <div id="scrollbar" class="scrollbar"></div>
       </div>
       <ul id="nav_list" class="fullsize">
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>私人兆赫</span></li>
-        <li class="hide"><span>James Blunt</span></li>
-        <li class="hide"><span>Westlife</span></li>
-        <li class="hide"><span>Avril Lavigne</span></li>
-        <li class="hide"><span>BEATLES</span></li>
-        <li class="hide"><span>Jay Chou</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide"><span>Coldplay</span></li>
-        <li class="hide list_end"><span>E.N.D</span></li>
       </ul>
     </nav>
     <div id="tableview">
@@ -104,7 +92,7 @@
         <span id="song_info">
           <span id="song_info_title">{{ music_now.title }}</span>
           <span id="song_info_artist">{{ music_now.artist }}</span>
-          <span id="song_info_time">0:00 / 3:44</span>
+          <span id="song_info_time">{{ time_formart(music_now.current_time) }} / {{ time_formart(music_now.length) }}</span>
         </span>
       </div>
     </div>

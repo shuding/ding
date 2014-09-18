@@ -3,476 +3,14 @@
  * Create by quietshu@gmail.com at 2014.9.14
  * */
 
-var musics = [
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/0.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/James\ Blunt/Moon\ Landing\ \(Deluxe\ Edition\)/13\ Kiss\ This\ Love\ Goodbye.m4a",
-        company: "Erased Tapes Records",
-        title: "Kiss This Love Goodbye",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/1.jpg",
-        ssid: "8074",
-        artist: "Taylor Swift",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Taylor\ Swift/Red/02\ Red.m4a",
-        company: "Erased Tapes Records",
-        title: "Red",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/2.jpg",
-        ssid: "8074",
-        artist: "Westlift",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "Greatest Hits",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/3.jpg",
-        ssid: "8074",
-        artist: "Coldplay",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "Ghost Stories",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/4.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/5.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/6.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/7.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/8.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/9.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/10.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/0.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/1.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/2.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/3.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/4.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/5.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/6.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/7.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/8.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/9.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    },
-    {
-        album : "\/subject\/4732961\/",
-        picture: "./img/cover/10.jpg",
-        ssid: "8074",
-        artist: "James Blunt",
-        url: "/Users/dsds/Music/iTunes/iTunes\ Media/Music/Coldplay/Viva\ la\ Vida/10\ Death\ and\ All\ His\ Friends.m4a",
-        company: "Erased Tapes Records",
-        title: "The Only One",
-        rating_avg: 4.46059,
-        length: 348,
-        subtype: "",
-        public_time: "2010",
-        sid: "1639693",
-        aid: "4732961",
-        sha256: "834329357c6ab0f591d84d14bef8c3e6c9333fdac0661308629785a6101df2ea",
-        kbps: "64",
-        albumtitle: "Moon Landing",
-        like: 0
-    }
-];
+var channels = [];
 var window_pos = [], drag_pos = [], on_drag = false, moved = false;
-var music_playing = false, play_mode = 0, music_now = {};
+var music_playing = false, play_mode = 0, music_now = {}, music_now_id = 0, volume = 0.5;
 var music_audio_object = null;
 var content_scope;
+var update_current_time_interval;
 
-var app = angular.module("ding", [], function($httpProvider) {
-    // Use x-www-form-urlencoded Content-Type
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-
-    /*
-     * The workhorse; converts an object to x-www-form-urlencoded serialization.
-     * @param {Object} obj
-     * @return {String}
-     * */
-    var param = function(obj) {
-        var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
-
-        for(name in obj) {
-            value = obj[name];
-
-            if(value instanceof Array) {
-                for(i=0; i<value.length; ++i) {
-                    subValue = value[i];
-                    fullSubName = name + '[' + i + ']';
-                    innerObj = {};
-                    innerObj[fullSubName] = subValue;
-                    query += param(innerObj) + '&';
-                }
-            }
-            else if(value instanceof Object) {
-                for(subName in value) {
-                    subValue = value[subName];
-                    fullSubName = name + '[' + subName + ']';
-                    innerObj = {};
-                    innerObj[fullSubName] = subValue;
-                    query += param(innerObj) + '&';
-                }
-            }
-            else if(value !== undefined && value !== null)
-                query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
-        }
-
-        return query.length ? query.substr(0, query.length - 1) : query;
-    };
-
-    // Override $http service's default transformRequest
-    $httpProvider.defaults.transformRequest = [function(data) {
-        return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
-    }];
-});
+var app = angular.module("ding", []);
 
 function content($scope) {
     if($scope)
@@ -485,27 +23,73 @@ function content($scope) {
             content_scope.play_mode = play_mode;
         if (content_scope.music_now === undefined)
             content_scope.music_now = music_now;
+        if (content_scope.time_formart === undefined)
+            content_scope.time_formart = function (s) {
+                if(s === undefined)
+                    return "0:00";
+                var m = Math.floor((+s) / 60);
+                s = (+s) % 60;
+                s = s < 10 ? ("0" + s) : s;
+                return m + ":" + s;
+            };
     }
+
+    var require_login_func = function (callback) {
+        // init model
+        music_audio_object = new Audio("");
+        $(music_audio_object).bind("canplay", function () {
+            music_audio_object.currentTime = musics[music_now_id].current_time | 0;
+            play_music();
+        });
+
+        network.get_musics(function () {
+            // load UI
+            network.load_channels(ui.load_channels);
+
+            ui.clear_wait().logo_animation().wait(2300).background_animation().wait(400).logo_fix_animation()
+                .wait(200).navigation_load().wait(200).tableview_load(musics).wait(400).tabbar_load()
+                .wait(200).control_btn_load().set_app_background(musics[0].picture).wait(400).layer_load();
+
+            // play music automatic
+            /*
+            setTimeout(function () {
+                ui.expand_cover(0);
+                change_play_no_func(0);
+            }, ui.wait_time + 400);
+            */
+        });
+
+        drag_func();
+    };
 
     var load_func = function () {
         // init model
         music_audio_object = new Audio("");
+        $(music_audio_object).bind("canplay", function () {
+            music_audio_object.currentTime = musics[music_now_id].current_time | 0;
+            play_music();
+        });
 
-        // load UI
-        ui.clear_wait().logo_animation().wait(2300).background_animation().wait(400).logo_fix_animation()
-            .wait(200).navigation_load().wait(200).tableview_load(musics).wait(400).tabbar_load()
-            .wait(200).control_btn_load().set_app_background(musics[0].picture);
+        network.get_musics(function () {
+            // load UI
+            network.load_channels(ui.load_channels);
 
-        // play music automatic
-        setTimeout(function () {
-            ui.expand_cover(0);
-            change_play_no_func(0);
-        }, ui.wait_time + 400);
+            ui.clear_wait().logo_animation().wait(2300).background_animation().wait(400).logo_fix_animation()
+                .wait(200).navigation_load().wait(200).tableview_load(musics).wait(400).tabbar_load()
+                .wait(200).control_btn_load().set_app_background(musics[0].picture);
+
+            // play music automatic
+            setTimeout(function () {
+                ui.expand_cover(0);
+                change_play_no_func(0);
+            }, ui.wait_time + 400);
+        });
     };
     var drag_func = function () {
         if(MacGap === undefined)
             return;
-        window_pos = [MacGap.Window.x, MacGap.Window.y];
+        on_drag = false;
+        window_pos = [Math.abs(MacGap.Window.x), Math.abs(MacGap.Window.y)];
         $(document).mousedown(function (event) {
             on_drag = true;
             moved = false;
@@ -519,50 +103,100 @@ function content($scope) {
                 moved = true;
                 var dx = event.pageX - drag_pos[0],
                     dy = event.pageY - drag_pos[1];
+
                 window_pos[0] += dx;
                 window_pos[1] -= dy;
                 MacGap.Window.move(window_pos[0], window_pos[1]);
             }
         });
     };
-    var load_music = function (no) {
-        //setTimeout(function () {
-
-        music_audio_object.src = musics[no].url;
-        music_audio_object.play();
-
-        music_playing = true;
-        content_scope.playing = music_playing;
+    var update_current_time = function () {
+        if(!music_playing) {
+            clearInterval(update_current_time_interval);
+            return;
+        }
+        musics[music_now_id].current_time = music_now.current_time = Math.floor(music_audio_object.currentTime);
         content_scope.$apply();
-        //}, 800);
+    };
+    var play_music = function () {
+        music_playing = true;
+        content_scope.playing = true;
+        music_audio_object.volume = volume;
+        music_audio_object.play();
+        content_scope.$apply();
+
+        update_current_time_interval = setInterval(update_current_time, 1000);
+    };
+    var pause_music = function () {
+        content_scope.$apply();
+        clearInterval(update_current_time_interval);
+        musics[music_now_id].current_time = music_audio_object.currentTime;
+        $(music_audio_object).animate({ volume: 0 }, 300);
+        setTimeout(function () {
+            music_audio_object.pause();
+        }, 300);
+    };
+    var load_music = function (no) {
+        music_audio_object.src = musics[no].url;
+
+        if(play_mode == 0)
+            music_audio_object.loop = "loop";
+        else {
+
+        }
     };
     var toggle_play_func = function () {
         music_playing = !music_playing;
         content_scope.playing = music_playing;
         if(music_playing)
-            music_audio_object.play();
+            play_music();
         else
-            music_audio_object.pause();
-        content_scope.$apply();
+            pause_music();
         if(music_playing)
             ui.clear_wait().music_info_animation();
     };
     var change_play_mode_func = function () {
         play_mode = (play_mode + 1) % 3;
         content_scope.play_mode = play_mode;
+        if(play_mode == 0)
+            music_audio_object.loop = "loop";
         content_scope.$apply();
     };
     var change_play_no_func = function (no) {
         if(music_now === musics[no])
             return false;
+        music_now_id = no;
         music_now = musics[no];
         content_scope.music_now = music_now;
         music_playing = false;
         content_scope.playing = music_playing;
         load_music(no);
-        content_scope.$apply();
         ui.clear_wait().music_info_animation();
         return true;
+    };
+    var prev_song_func = function () {
+        change_play_no_func((music_now_id + musics.length - 1) % musics.length);
+    };
+    var next_song_func = function () {
+        change_play_no_func((music_now_id + 1) % musics.length);
+    };
+    var load_channel_func = function (id) {
+        pause_music();
+        ui.clear_wait().wait(500).set_app_background("#fff", true);
+        setTimeout(function () {
+            ui.remove_musics(function () {
+                $("#left_cover_list, #right_cover_list").html("");
+                musics = [];
+                channel_now = channels[id]["channel_id"];
+                network.get_musics(function () {
+                    ui.clear_wait().tableview_load(musics).wait(500);
+                    setTimeout(function () {
+                        ui.clear_wait().expand_cover(0).wait(500).set_app_background(musics[0].picture);
+                        change_play_no_func(0);
+                    }, ui.wait_time + 400);
+                });
+            });
+        }, 800);
     };
 
     var ret_obj = {
@@ -570,7 +204,11 @@ function content($scope) {
         bind_drag: drag_func,
         toggle_play: toggle_play_func,
         change_play_mode: change_play_mode_func,
-        change_play_no: change_play_no_func
+        change_play_no: change_play_no_func,
+        prev_song: prev_song_func,
+        next_song: next_song_func,
+        require_login: require_login_func,
+        load_channel: load_channel_func
     };
     return ret_obj;
 };

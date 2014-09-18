@@ -9,6 +9,9 @@
 * {
   -webkit-user-select: none;
 }
+input {
+  -webkit-user-select: auto;
+}
 body, #content, .fullsize {
   position: absolute;
   padding: 0;
@@ -172,6 +175,7 @@ li.song_cover {
   width: 200px;
   height: 200px;
   background-size: cover;
+  background-color: #fff;
 }
 #left_cover_list li.song_cover.expand {
   width: 400px;
@@ -369,11 +373,34 @@ li.song_cover {
 #cover_control_icons svg path {
   fill: #fff;
 }
-#song_progress_bar {
+/*
+.song_progress_bar {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.44);
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 0 30px #000;
+}
+.song_progress_bar_inner {
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+*/
+#login_form {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 300px;
+  line-height: 100px;
+}
+#login_form input {
+  -webkit-appearance: none;
+}
+#login_form input.focus {
+  box-shadow: 0 0 5px blue;
 }

@@ -14,9 +14,26 @@ var ui = {
         ui.wait_time = 0;
         return ui;
     },
+    load_channels: function () {
+        var channel_parent_el = $("#nav_list");
+        for(var i = 0; i < channels.length; ++i) {
+            channel_parent_el.append($('<li class="hide"><span>' + channels[i]["name"] + '</span></li>'));
+        }
+        channel_parent_el.append($('<li class="hide list_end"><span>E.N.D</span></li>'));
+    },
     wait: function (t) {
         ui.wait_time += t;
         return ui;
+    },
+    /* front layer animation */
+    layer_load: function () {
+        setTimeout(function () {
+            $("h1#logo").addClass("layer");
+            setTimeout(function () {
+                $("#login_form").addClass("play");
+            }, 400);
+            return ui;
+        }, ui.wait_time);
     },
     /* logo loading animation */
     logo_animation: function () {
@@ -61,8 +78,9 @@ var ui = {
                 //$("#nav_list").css("-webkit-transform", "translateY(" + scroll_dis + "px)");
                 var pos = Math.floor(($(this).scrollTop() / 500.) * (lis.length - 5));
                 inner_scroll_top = pos * 73;
-                if(pos == last_scroll_pos)
+                if(pos === last_scroll_pos) {
                     return;
+                }
                 for(var i = 0; i < lis.length; ++i) {
                     var li = lis[i];
                     var delay = 0;
@@ -86,12 +104,16 @@ var ui = {
             };
             $("#scrollbar_container").scroll(scroll_animation).click(function (event) {
                 var pos = Math.floor((event.pageY - 50) / 73) + last_scroll_pos;
+                content().load_channel(pos);
             });
         }, ui.wait_time);
         return ui;
     },
     /* tableview animation */
     tableview_load: function (musics) {
+        ui.expanded = false;
+        ui.last_scroll_pos = 0;
+        $("#tableview_scrollbar_container").scrollTop(0);
         for(var i = 0; i < musics.length; ++i) {
             var cover_element = $("<li id='song_cover_" + i + "' class='song_cover hide'></li>");
             cover_element.css("background-image", "url(" + musics[i].picture + ")");
@@ -101,6 +123,7 @@ var ui = {
                 $("#left_cover_list").append(cover_element);
         }
         ui.height = musics.length / 2;
+
         setTimeout(function () {
             $("#tableview").addClass("play");
             var left_covers = $("#left_cover_list .song_cover"),
@@ -127,6 +150,7 @@ var ui = {
             var height = $("#left_cover_list")[0].scrollHeight - 400;
             var inner_scroll_top;
             ui.scroll_animation = function () {
+                console.log(left_covers[0]);
                 var scroll_dis = $(this).scrollTop();
                 var pos = Math.floor(($(this).scrollTop() / 450.) * (ui.height - 2));
                 inner_scroll_top = pos * 200;
@@ -178,7 +202,8 @@ var ui = {
                 }
                 ui.last_scroll_pos = pos;
             };
-            $("#tableview_scrollbar_container").scroll(ui.scroll_animation).mousedown(function (event) {
+
+            $("#tableview_scrollbar_container").unbind("scroll").unbind("mousedown").unbind("click").bind("scroll", ui.scroll_animation).bind("mousedown", function (event) {
                 var pos = Math.floor(event.pageY / 200) + ui.last_scroll_pos;
                 var pos_x = (event.pageX < 300) ? 0 : 1;
                 var no = pos * 2 + pos_x;
@@ -209,7 +234,7 @@ var ui = {
                 setTimeout(function () {
                     $("#song_cover_" + no).removeClass("pressdown");
                 }, 1000);
-            }).click(function (event) {
+            }).bind("click", function (event) {
                 if(moved) {
                     event.preventDefault();
                     return;
@@ -261,56 +286,23 @@ var ui = {
     scroll_to_pos: function (pos) {
         if(pos == ui.last_scroll_pos)
             return ui;
-        $("#tableview_scrollbar_container").scrollTop(Math.floor(450 * (pos + 1) / (ui.height - 2)));
+        $("#tableview_scrollbar_container").scrollTop(Math.ceil(450 * (pos) / (ui.height - 2)));
         var inner_scroll_top = pos * 200;
-        var delta = 0;
-        var left_covers = $("#left_cover_list .song_cover"),
-            right_covers = $("#right_cover_list .song_cover");
-        for(var i = 0; i < left_covers.length; ++i) {
-            var li = left_covers[i];
-            var delay = 0;
-            if($(li).attr("data-delay-delta"))
-                delta = (+$(li).attr("data-delay-delta"));
-            if(pos > ui.last_scroll_pos) {
-                if (i + delta >= ui.last_scroll_pos)
-                    delay = (i + delta - ui.last_scroll_pos) * 80;
-                else
-                    delay = 0;
-            }
-            else {
-                if (i + delta <= ui.last_scroll_pos + 4)
-                    delay = (ui.last_scroll_pos + 4 - i - delta) * 80;
-                else
-                    delay = 0;
-            }
-            setTimeout(function (li) {
-                $(li).css("-webkit-transform", "translateY(-" + inner_scroll_top + "px) translateZ(0)");
-            }, delay, li);
-        }
-        delta = 0;
-        for(var i = 0; i < right_covers.length; ++i) {
-            var li = right_covers[i];
-            var delay = 0;
-            if($(li).attr("data-delay-delta"))
-                delta = (+$(li).attr("data-delay-delta"));
-            if(pos > ui.last_scroll_pos) {
-                if (i + delta >= ui.last_scroll_pos)
-                    delay = (i + delta - ui.last_scroll_pos) * 80;
-                else
-                    delay = 0;
-            }
-            else {
-                if (i + delta <= ui.last_scroll_pos + 4)
-                    delay = (ui.last_scroll_pos + 4 - i - delta) * 80;
-                else
-                    delay = 0;
-            }
-            setTimeout(function (li) {
-                $(li).css("-webkit-transform", "translateY(-" + inner_scroll_top + "px) translateZ(0)");
-            }, delay + 80, li);
-        }
+        $("#left_cover_list .song_cover, #right_cover_list .song_cover").addClass("ease_scroll")
+            .css("-webkit-transform", "translateY(-" + inner_scroll_top + "px) translateZ(0)");
+        setTimeout(function () {
+            $("#left_cover_list .song_cover, #right_cover_list .song_cover").removeClass("ease_scroll");
+        }, 800);
         ui.last_scroll_pos = pos;
         return ui;
+    },
+    /* remove musics animation */
+    remove_musics: function (callback) {
+        $("#left_cover_list .song_cover, #right_cover_list .song_cover").addClass("ease_scroll")
+            .css("-webkit-transform", "translateY(-" + ((ui.height + 3) * 200) + "px) translateZ(0)");
+        setTimeout(function (callback) {
+            callback();
+        }, 800, callback);
     },
     /* expand the song cover animation */
     back_to_default_cover: function () {
@@ -342,6 +334,8 @@ var ui = {
         return true;
     },
     expand_cover: function (id) {
+        if(ui.expanded)
+            return false;
         var left_lis = $("#left_cover_list .song_cover"),
             right_lis = $("#right_cover_list .song_cover");
         $("#cover_control_icons").addClass("play");
@@ -369,9 +363,9 @@ var ui = {
         if(Math.floor(id / 2) != ui.last_scroll_pos) {
             setTimeout(function () {
                 ui.scroll_to_pos(Math.floor(id / 2));
-            }, 500);
+            }, 400);
         }
-// TODO:        $("#song_cover_" + id).html('<div id="song_progress_bar"><span id="song_progress_bar_inner"></span></div>');
+//        $("#song_cover_" + id).html('<div class="song_progress_bar"><span class="song_progress_bar_inner"></span></div>');
         ui.expanded = true;
         ui.expand_id = id;
         return ui;
@@ -439,6 +433,14 @@ var ui = {
                     event.preventDefault();
                     return;
                 }
+                if(ui.expanded)
+                    ui.back_to_default_cover();
+                if($(this).attr("id") == "prev_btn")
+                    content().prev_song();
+                else
+                    content().next_song();
+                ui.expand_cover(music_now_id);
+                ui.change_app_background(musics[music_now_id].picture);
             });
             $("#play_mode_btn").mousedown(function (event) {
                 var btn_parent = $($("#tabbar .tabbar_icon")[2]);
@@ -492,8 +494,8 @@ var ui = {
                     event.preventDefault();
                     return;
                 }
-                if(music_playing)
-                    ui.scroll_to_pos(Math.floor(musics.indexOf(music_now) / 2));
+                if(!ui.expand_cover(music_now_id))
+                    ui.scroll_to_pos(Math.floor(music_now_id / 2));
             });
         }, ui.wait_time);
         return ui;
@@ -516,7 +518,7 @@ var ui = {
         return ui;
     },
     /* set the main background */
-    set_app_background: function (img_src) {
+    set_app_background: function (img_src, s) {
         if(!img_src)
             return ui;
         setTimeout(function () {
@@ -524,9 +526,14 @@ var ui = {
             $("#logo, #control_btns > div").addClass("drop_shadow");
             $("#tableview").css("background", "rgba(0, 0, 0, .1)");
             $("#content").addClass("blur_bg");
-            $("#background").addClass("blur_bg").css({
-                "background-image": "url(" + img_src + ")"
-            });
+            if(s)
+                $("#background").addClass("blur_bg").css({
+                    "background": img_src
+                });
+            else
+                $("#background").addClass("blur_bg").css({
+                    "background-image": "url(" + img_src + ")"
+                });
         }, ui.wait_time);
         return ui;
     },
