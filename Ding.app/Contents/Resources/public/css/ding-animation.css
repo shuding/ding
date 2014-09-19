@@ -148,7 +148,7 @@ h1#logo.fix span:nth-of-type(1) {
 ul#nav_list li {
   opacity: 1;
   -webkit-transform: translateX(0) scale(1, 1) translateZ(0);
-  -webkit-transition: -webkit-transform .8s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .8s ease;
+  -webkit-transition: -webkit-transform .8s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .8s ease, background .4s ease;
 }
 ul#nav_list li.hide {
   opacity: 0;

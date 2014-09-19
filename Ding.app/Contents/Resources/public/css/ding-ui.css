@@ -12,6 +12,9 @@
 input {
   -webkit-user-select: auto;
 }
+.loading_cursor {
+  cursor: wait !important;
+}
 body, #content, .fullsize {
   position: absolute;
   padding: 0;
@@ -97,7 +100,6 @@ nav#navigation.play {
 .scrollbar_container {
   z-index: 1;
   overflow-y: scroll;
-  cursor: default;
 }
 .scrollbar_container::-webkit-scrollbar {
   display: none;
@@ -109,7 +111,7 @@ nav#navigation.play {
 }
 ul#nav_list {
   /* use GPU render */
-  webkit-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
   overflow: hidden;
 }
 ul#nav_list li {
@@ -120,9 +122,12 @@ ul#nav_list li {
   margin: 0 auto 3px auto;
   font-size: 13px;
   line-height: 13px;
-  background: #001F3F;
+  background: rgba(0, 31, 63, .7);
   overflow: hidden;
-  cursor: default;
+  cursor: pointer;
+}
+ul#nav_list li.channel_active {
+  background: rgba(220, 4, 64, .6);
 }
 ul#nav_list li.list_end {
   background: transparent;
@@ -219,11 +224,12 @@ li.song_cover {
   white-space: nowrap;
   overflow: hidden;
 }
-#tabbar .tabbar_icon.active span, #tabbar .tabbar_icon.active span {
+#tabbar .tabbar_icon.active span, #tabbar .tabbar_icon:hover span {
   color: #fff;
   background: #001F3F;
+  cursor: pointer;
 }
-#tabbar .tabbar_icon.active path, #tabbar .tabbar_icon.active path, #tabbar .tabbar_icon.active text {
+#tabbar .tabbar_icon.active path, #tabbar .tabbar_icon.active path, #tabbar .tabbar_icon.active text, #tabbar .tabbar_icon:hover path, #tabbar .tabbar_icon:hover path, #tabbar .tabbar_icon:hover text {
   fill: #fff;
 }
 #control_btns {
@@ -378,7 +384,7 @@ li.song_cover {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 100%;
+  height: ;
   background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 0 30px #000;
 }

@@ -39,6 +39,7 @@ function content($scope) {
         music_audio_object = new Audio("");
         $(music_audio_object).bind("canplay", function () {
             music_audio_object.currentTime = musics[music_now_id].current_time | 0;
+            ui.music_info_animation();
             play_music();
         });
 
@@ -67,22 +68,28 @@ function content($scope) {
         music_audio_object = new Audio("");
         $(music_audio_object).bind("canplay", function () {
             music_audio_object.currentTime = musics[music_now_id].current_time | 0;
+            ui.music_info_animation();
             play_music();
         });
 
+        $("body").addClass("loading_cursor");
+
         network.get_musics(function () {
             // load UI
-            network.load_channels(ui.load_channels);
+            network.load_channels(function() {
+                ui.load_channels();
 
-            ui.clear_wait().logo_animation().wait(2300).background_animation().wait(400).logo_fix_animation()
-                .wait(200).navigation_load().wait(200).tableview_load(musics).wait(400).tabbar_load()
-                .wait(200).control_btn_load().set_app_background(musics[0].picture);
+                ui.clear_wait().logo_animation().wait(2300).background_animation().wait(400).logo_fix_animation()
+                    .wait(200).navigation_load().wait(200).tableview_load(musics).wait(400).tabbar_load()
+                    .wait(200).control_btn_load().set_app_background(musics[0].picture);
 
-            // play music automatic
-            setTimeout(function () {
-                ui.expand_cover(0);
-                change_play_no_func(0);
-            }, ui.wait_time + 400);
+                // play music automatic
+                setTimeout(function () {
+                    $("body").remove("loading_cursor");
+                    ui.expand_cover(0);
+                    change_play_no_func(0);
+                }, ui.wait_time + 400);
+            });
         });
     };
     var drag_func = function () {

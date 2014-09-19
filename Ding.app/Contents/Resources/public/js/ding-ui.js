@@ -20,6 +20,7 @@ var ui = {
             channel_parent_el.append($('<li class="hide"><span>' + channels[i]["name"] + '</span></li>'));
         }
         channel_parent_el.append($('<li class="hide list_end"><span>E.N.D</span></li>'));
+        $($("#nav_list li")[0]).addClass("channel_active");
     },
     wait: function (t) {
         ui.wait_time += t;
@@ -104,6 +105,8 @@ var ui = {
             };
             $("#scrollbar_container").scroll(scroll_animation).click(function (event) {
                 var pos = Math.floor((event.pageY - 50) / 73) + last_scroll_pos;
+                $(".channel_active").removeClass("channel_active");
+                $($("#nav_list li")[pos]).addClass("channel_active");
                 content().load_channel(pos);
             });
         }, ui.wait_time);
@@ -115,7 +118,7 @@ var ui = {
         ui.last_scroll_pos = 0;
         $("#tableview_scrollbar_container").scrollTop(0);
         for(var i = 0; i < musics.length; ++i) {
-            var cover_element = $("<li id='song_cover_" + i + "' class='song_cover hide'></li>");
+            var cover_element = $("<li id='song_cover_" + i + "' class='song_cover hide'><div class='song_progress_bar'><span class='song_progress_bar_inner'></span></div></li>");
             cover_element.css("background-image", "url(" + musics[i].picture + ")");
             if(i % 2)
                 $("#right_cover_list").append(cover_element);
@@ -150,7 +153,6 @@ var ui = {
             var height = $("#left_cover_list")[0].scrollHeight - 400;
             var inner_scroll_top;
             ui.scroll_animation = function () {
-                console.log(left_covers[0]);
                 var scroll_dis = $(this).scrollTop();
                 var pos = Math.floor(($(this).scrollTop() / 450.) * (ui.height - 2));
                 inner_scroll_top = pos * 200;
@@ -298,6 +300,7 @@ var ui = {
     },
     /* remove musics animation */
     remove_musics: function (callback) {
+        music_now = {};
         $("#left_cover_list .song_cover, #right_cover_list .song_cover").addClass("ease_scroll")
             .css("-webkit-transform", "translateY(-" + ((ui.height + 3) * 200) + "px) translateZ(0)");
         setTimeout(function (callback) {
@@ -365,7 +368,6 @@ var ui = {
                 ui.scroll_to_pos(Math.floor(id / 2));
             }, 400);
         }
-//        $("#song_cover_" + id).html('<div class="song_progress_bar"><span class="song_progress_bar_inner"></span></div>');
         ui.expanded = true;
         ui.expand_id = id;
         return ui;
@@ -528,11 +530,12 @@ var ui = {
             $("#content").addClass("blur_bg");
             if(s)
                 $("#background").addClass("blur_bg").css({
-                    "background": img_src
+                    "background-color": img_src
                 });
             else
                 $("#background").addClass("blur_bg").css({
-                    "background-image": "url(" + img_src + ")"
+                    "background-image": "url(" + img_src + ")",
+                    "background-color": "rgba(255, 255, 255, 0.15)"
                 });
         }, ui.wait_time);
         return ui;
@@ -569,5 +572,6 @@ var ui = {
             setInterval(ui.music_info_interval, 10000, span);
         };
         move_func($("#song_info_title"));
+        move_func($("#song_info_artist"));
     }
 }
