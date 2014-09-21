@@ -226,7 +226,7 @@ li.song_cover {
 }
 #tabbar .tabbar_icon.active span, #tabbar .tabbar_icon:hover span {
   color: #fff;
-  background: #001F3F;
+  background: rgba(0, 31, 63, 0.6);
   cursor: pointer;
 }
 #tabbar .tabbar_icon.active path, #tabbar .tabbar_icon.active path, #tabbar .tabbar_icon.active text, #tabbar .tabbar_icon:hover path, #tabbar .tabbar_icon:hover path, #tabbar .tabbar_icon:hover text {
@@ -310,7 +310,7 @@ li.song_cover {
   height: 100%;
 }
 #play_btn.hover, #prev_next_btn.hover, #play_mode_btn.hover {
-  background: #001F3F;
+  background: rgba(0, 31, 63, 0.6);
 }
 .hover path, .hover text {
   fill: #fff;
@@ -379,22 +379,22 @@ li.song_cover {
 #cover_control_icons svg path {
   fill: #fff;
 }
-/*
 .song_progress_bar {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: ;
-  background: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 30px #000;
+  height: 1px;
+  background: rgba(255, 255, 255, .8);
 }
 .song_progress_bar_inner {
   position: absolute;
-  width: 30%;
+  width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: #001F3F;
 }
-*/
+.expand .song_progress_bar {
+  height: 3px;
+}
 #login_form {
   position: absolute;
   display: none;
@@ -402,11 +402,41 @@ li.song_cover {
   left: 0;
   width: 600px;
   height: 300px;
-  line-height: 100px;
+  margin-top: 80px;
+  line-height: 50px;
 }
 #login_form input {
-  -webkit-appearance: none;
+  width: 200px;
+  height: 15px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  background: #fff;
+  color: #001f3f;
+  line-height: 20px;
+  font-size: 13px;
+  font-family: 'Lucida Grande', 'Segoe UI', Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
 }
-#login_form input.focus {
-  box-shadow: 0 0 5px blue;
+#login_form button {
+  height: 30px;
+  width: 100px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: bolder;
+  background: #001f3f;
+  color: #FFF;
+  border: none;
+}
+#login_form button:hover {
+  background: rgba(0, 31, 63, 0.8);
+}
+#login_form button:active {
+  background: #600f10;
+}
+#login_form input, #login_form button {
+  margin: 5px 100px;
+}
+#login_form #title {
+  display: block;
+  font-family: Helvetica, Arial, Sans-serif;
 }

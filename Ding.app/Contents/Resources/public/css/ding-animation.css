@@ -196,7 +196,7 @@ ul#left_cover_list li.hide, ul#right_cover_list li.hide {
   -webkit-transition: fill .2s ease;
 }
 #control_btns div:active {
-  background: #001F3F;
+  background: rgba(0, 31, 63, 0.6);
 }
 #control_btns div.drop_shadow:active {
   -webkit-filter: none;
@@ -255,4 +255,12 @@ ul#left_cover_list li.hide, ul#right_cover_list li.hide {
 .play_mode_2 svg#shuffle {
   -webkit-transform: scale(1, 1) rotateZ(0);
   opacity: 1;
+}
+.song_progress_bar_inner {
+  -webkit-transition: -webkit-transform .3s linear;
+  -webkit-transform: scaleX(0);
+  -webkit-transform-origin-x: left;
+}
+#login_form button {
+  -webkit-transition: background .4s ease;
 }

@@ -36,6 +36,20 @@ var ui = {
             return ui;
         }, ui.wait_time);
     },
+    layer_unload: function () {
+        setTimeout(function () {
+            $("h1#logo").animate({
+                "opacity": 0
+            }, 400);
+            setTimeout(function () {
+                $("#login_form").removeClass("play");
+                $("h1#logo").removeClass("layer").animate({
+                    "opacity": 1
+                }, 400);
+            }, 400);
+            return ui;
+        }, ui.wait_time);
+    },
     /* logo loading animation */
     logo_animation: function () {
         setTimeout(function () {
@@ -93,7 +107,7 @@ var ui = {
                     }
                     else {
                         if (i <= last_scroll_pos + 4)
-                            delay = (ui.last_scroll_pos + 4 - i) * 50;
+                            delay = (last_scroll_pos + 4 - i) * 50;
                         else
                             delay = 0;
                     }
@@ -112,11 +126,26 @@ var ui = {
         }, ui.wait_time);
         return ui;
     },
+    /* color theif */
+    color_theif: function () {
+        for(var i = 0; i < musics.length; ++i) {
+            var img = new Image();
+            img.src = musics[i].picture;
+            img.style.width = img.style.height = "200px";
+            img.onload = function () {
+                // TODO
+                var ct = new ColorThief();
+                //console.log(ct.getColor(this));
+            }
+        }
+        return ui;
+    },
     /* tableview animation */
     tableview_load: function (musics) {
         ui.expanded = false;
         ui.last_scroll_pos = 0;
         $("#tableview_scrollbar_container").scrollTop(0);
+
         for(var i = 0; i < musics.length; ++i) {
             var cover_element = $("<li id='song_cover_" + i + "' class='song_cover hide'><div class='song_progress_bar'><span class='song_progress_bar_inner'></span></div></li>");
             cover_element.css("background-image", "url(" + musics[i].picture + ")");
@@ -301,8 +330,10 @@ var ui = {
     /* remove musics animation */
     remove_musics: function (callback) {
         music_now = {};
-        $("#left_cover_list .song_cover, #right_cover_list .song_cover").addClass("ease_scroll")
+        $("#left_cover_list .song_cover").addClass("ease_scroll")
             .css("-webkit-transform", "translateY(-" + ((ui.height + 3) * 200) + "px) translateZ(0)");
+        $("#right_cover_list .song_cover").addClass("ease_scroll")
+            .css("-webkit-transform", "translateY(-" + ((ui.height + 4) * 200) + "px) translateZ(0)");
         setTimeout(function (callback) {
             callback();
         }, 800, callback);

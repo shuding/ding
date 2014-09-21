@@ -25,9 +25,9 @@ $(window).load(function() {
             authed = false;
     }
 
-    new_user = false;
+    //new_user = true;
 
-    if(new_user) {
+    if(!authed) { //new_user) {
         content().require_login();
     }
     else {
