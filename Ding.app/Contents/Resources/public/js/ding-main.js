@@ -14,7 +14,7 @@ $(window).load(function() {
             window.localStorage["new_user"] = true;
 
         if(window.localStorage["authed"]) {
-            authed = window.localStorage.authed;
+            authed = true;
             token = window.localStorage.token;
             expire = window.localStorage.expire;
             user_name = window.localStorage.user_name;

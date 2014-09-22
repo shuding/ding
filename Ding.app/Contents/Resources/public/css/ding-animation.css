@@ -264,3 +264,6 @@ ul#left_cover_list li.hide, ul#right_cover_list li.hide {
 #login_form button {
   -webkit-transition: background .4s ease;
 }
+#cover_control_icons {
+  -webkit-transition: bottom .5s ease;
+}

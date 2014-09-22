@@ -99,8 +99,9 @@ var network = {
                     window.localStorage.user_id = user_id;
                 }
                 $("#password").val("");
-                console.log(data);
-                callback();
+
+                network.load_channels(callback);
+
             }
         });
     },

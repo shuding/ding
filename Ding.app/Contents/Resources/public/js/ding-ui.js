@@ -15,12 +15,14 @@ var ui = {
         return ui;
     },
     load_channels: function () {
-        var channel_parent_el = $("#nav_list");
+        var channel_parent_el = $("#nav_list").html("");
+        $($("#nav_list li")[0]).removeClass("channel_active");
         for(var i = 0; i < channels.length; ++i) {
             channel_parent_el.append($('<li class="hide"><span>' + channels[i]["name"] + '</span></li>'));
         }
         channel_parent_el.append($('<li class="hide list_end"><span>E.N.D</span></li>'));
         $($("#nav_list li")[0]).addClass("channel_active");
+        return ui;
     },
     wait: function (t) {
         ui.wait_time += t;
@@ -47,8 +49,8 @@ var ui = {
                     "opacity": 1
                 }, 400);
             }, 400);
-            return ui;
         }, ui.wait_time);
+        return ui;
     },
     /* logo loading animation */
     logo_animation: function () {
@@ -117,7 +119,11 @@ var ui = {
                 }
                 last_scroll_pos = pos;
             };
-            $("#scrollbar_container").scroll(scroll_animation).click(function (event) {
+            $("#scrollbar_container").unbind("scroll").unbind("click").bind("scroll", scroll_animation).bind("click", function (event) {
+                if(moved) {
+                    event.preventDefault();
+                    return;
+                }
                 var pos = Math.floor((event.pageY - 50) / 73) + last_scroll_pos;
                 $(".channel_active").removeClass("channel_active");
                 $($("#nav_list li")[pos]).addClass("channel_active");
@@ -181,6 +187,7 @@ var ui = {
             ui.last_scroll_pos = 0;
             var height = $("#left_cover_list")[0].scrollHeight - 400;
             var inner_scroll_top;
+            var show_control_btn = false;
             ui.scroll_animation = function () {
                 var scroll_dis = $(this).scrollTop();
                 var pos = Math.floor(($(this).scrollTop() / 450.) * (ui.height - 2));
@@ -270,6 +277,13 @@ var ui = {
                     event.preventDefault();
                     return;
                 }
+
+                if(ui.expanded && ui.expand_id == ui.last_scroll_pos * 2) {
+                    if(event.pageY >= 300) {
+
+                    }
+                }
+
                 var pos = Math.floor(event.pageY / 200) + ui.last_scroll_pos;
                 var pos_x = (event.pageX < 300) ? 0 : 1;
                 var no = pos * 2 + pos_x;
@@ -310,7 +324,6 @@ var ui = {
                     }
                 }
             });
-
         }, ui.wait_time);
         return ui;
     },

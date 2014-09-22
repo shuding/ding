@@ -7,7 +7,7 @@ var channels = [];
 var window_pos = [], drag_pos = [], on_drag = false, moved = false;
 var music_playing = false, play_mode = 0, music_now = {}, music_now_id = 0, volume = 0.5;
 var music_audio_object = null;
-var content_scope;
+var content_scope, channel_index = 0;
 var update_current_time_interval;
 
 var app = angular.module("ding", []);
@@ -65,10 +65,9 @@ function content($scope) {
 
             $("#login_form").submit(function () {
                 network.auth($("#email").val(), $("#password").val(), function () {
-                    ui.clear_wait().layer_unload();
+                    ui.clear_wait().layer_unload().load_channels().navigation_load();
                     setTimeout(function () {
-                        ui.expand_cover(0);
-                        change_play_no_func(0);
+                        load_channel_func(0);
                     }, 400);
                 });
             });
@@ -212,10 +211,15 @@ function content($scope) {
         change_play_no_func((music_now_id + musics.length - 1) % musics.length);
     };
     var next_song_func = function () {
-        change_play_no_func((music_now_id + 1) % musics.length);
+        if(music_now_id + 1 < musics.length)
+            change_play_no_func(music_now_id + 1);
+        else {
+            load_channel_func(channel_index);
+        }
     };
     var load_channel_func = function (id) {
         pause_music();
+        channel_index = id;
         ui.clear_wait().wait(500).set_app_background("#fff", true);
         setTimeout(function () {
             ui.remove_musics(function () {
