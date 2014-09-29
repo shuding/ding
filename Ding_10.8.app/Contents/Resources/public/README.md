@@ -1,0 +1,2 @@
+SVG icons from [http://raphaeljs.com/icons](http://raphaeljs.com/icons), the MIT license.
+Icons made by Catalin Fertu from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
