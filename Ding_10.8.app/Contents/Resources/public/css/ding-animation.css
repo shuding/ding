@@ -268,7 +268,7 @@ ul#left_cover_list li.hide, ul#right_cover_list li.hide {
   opacity: 1;
 }
 .song_progress_bar {
-  -webkit-transition: height .5s linear;
+  -webkit-transition: background-color .5s linear;
 }
 .song_progress_bar_inner {
   -webkit-transition: width 1s linear;
