@@ -7,6 +7,9 @@ var musics = [];
 var channel_now = 0;
 
 var network = {
+    preload_music: function () {
+
+    },
     get_musics: function (callback) {
         if(authed) {
             network.get_user_musics(callback);
@@ -25,8 +28,6 @@ var network = {
         });
     },
     get_user_musics: function (callback) {
-        console.log("break point user musics");
-
         $.ajax({
             url: api_domain + "/radio/people?app_name=radio_desktop_win&version=100&channel=" + channel_now + "&type=n&user_id=" + user_id + "&expire=" + expire + "&token=" + token
         }).done(function (data) {
@@ -154,22 +155,36 @@ var network = {
                 }
                 else {
                     $.ajax({
+                        type: "HEAD",
                         url: data.result[0].lrc,
-                        type: "GET",
-                        error: function (data) {
+                        error: function () {
+                            console.log("Lyrics 404");
                             musics[id].info = "未找到歌词 :(";
                             if(callback)
                                 callback();
                         },
-                        success: function (data) {
-                            console.log(data);
-                            data = data.replace(/\[(.*)\]/g, '').trim();
-                            data = data.replace(/\n/g, '\n<br />');
-                            musics[id].info = data;
-                            if(callback)
-                                callback();
+                        success: function () {
+                            $.ajax({
+                                url: data.result[0].lrc,
+                                type: "GET",
+                                error: function (data) {
+                                    musics[id].info = "未找到歌词 :(";
+                                    if(callback)
+                                        callback();
+                                },
+                                success: function (data) {
+                                    console.log(data);
+                                    data = data.replace(/\[(.*)\]/g, '').trim();
+                                    data = data.replace(/\n/g, '\n<br />');
+                                    musics[id].info = data;
+                                    if(callback)
+                                        callback();
+                                }
+                            });
                         }
-                    })
+                    }).done(function (data) {
+                        console.log(data);
+                    });
                 }
             }
         });
