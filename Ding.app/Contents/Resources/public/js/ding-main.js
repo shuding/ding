@@ -13,7 +13,7 @@ $(window).load(function() {
         else
             window.localStorage["new_user"] = true;
 
-        if(window.localStorage["authed"]) {
+        if(window.localStorage["authed"] === "true") {
             authed = true;
             token = window.localStorage.token;
             expire = window.localStorage.expire;
@@ -25,8 +25,9 @@ $(window).load(function() {
             authed = false;
     }
 
-    //new_user = true;
+    new_user = true;
 
+    content().init();
     if(!authed) { //new_user) {
         content().require_login();
     }

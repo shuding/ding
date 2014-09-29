@@ -79,6 +79,7 @@ var network = {
             url: api_domain + "/login?app_name=radio_desktop_win&version=100&email=" + email + "&password=" + password,
             type: "GET",
             error: function (data) {
+                alert("登陆失败！请检查用户名以及密码。错误代码：" + data);
                 console.log("Error: ");
                 console.log(data);
             },
@@ -98,7 +99,8 @@ var network = {
                     window.localStorage.user_email = user_email;
                     window.localStorage.user_id = user_id;
                 }
-                $("#password").val("");
+                $("#password").val("").hide();
+                $("#login_btn").html("logout");
 
                 network.load_channels(callback);
 
@@ -109,11 +111,78 @@ var network = {
         if(!authed)
             return;
 
-        console.log("end of song: " + sid);
         $.ajax({
             url: api_domain + "/radio/people?app_name=radio_desktop_win&version=100&channel=" + channel_now + "&type=e&user_id=" + user_id + "&expire=" + expire + "&token=" + token + "&sid=" + sid
         }).done(function (data) {
             console.log(data);
+        });
+    },
+    get_music_info: function (id, callback) {
+        /*
+        $.ajax({
+            url: "https://api.douban.com/v2/music/" + musics[id].aid,
+            type: "GET",
+            error: function (data) {
+                console.log("Error: ");
+                console.log(data);
+            },
+            success: function (data) {
+                musics[id].info = data;
+                if(musics[id].info.summary == "None")
+                    musics[id].info.summary = "<span style='text-align:center'>无详细信息</span>";
+                musics[id].info.summary = musics[id].info.summary.replace(/\\n/g, "<br/>");
+                if(callback)
+                    callback();
+            }
+        });
+        */
+        // return lyrics = =||
+        // info from douban is really a mess
+        $.ajax({
+            url: "http://geci.me/api/lyric/" + musics[id].title + "/" + musics[id].artist,
+            type: "GET",
+            error: function (data) {
+                musics[id].info = "未找到歌词 :(";
+                if(callback)
+                    callback();
+            },
+            success: function (data) {
+                if(data.count == 0) {
+                    musics[id].info = "未找到歌词 :(";
+                    if(callback)
+                        callback();
+                }
+                else {
+                    $.ajax({
+                        url: data.result[0].lrc,
+                        type: "GET",
+                        error: function (data) {
+                            musics[id].info = "未找到歌词 :(";
+                            if(callback)
+                                callback();
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            data = data.replace(/\[(.*)\]/g, '').trim();
+                            data = data.replace(/\n/g, '\n<br />');
+                            musics[id].info = data;
+                            if(callback)
+                                callback();
+                        }
+                    })
+                }
+            }
+        });
+    },
+    update_music_like_info: function (sid, status) {
+        if(!authed)
+            return;
+
+        console.log(api_domain + "/radio/people?app_name=radio_desktop_win&version=100&channel=" + channel_now + "&type=" + status + "&user_id=" + user_id + "&expire=" + expire + "&token=" + token + "&sid=" + sid);
+        $.ajax({
+            type: "GET",
+            url: api_domain + "/radio/people?app_name=radio_desktop_win&version=100&channel=" + channel_now + "&type=" + status + "&user_id=" + user_id + "&expire=" + expire + "&token=" + token + "&sid=" + sid
+        }).done(function (data) {
         });
     }
 };

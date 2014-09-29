@@ -3,13 +3,16 @@
  * Create by quietshu@gmail.com at 2014.9.14
  * */
 var ui = {
-    /* controll function timing */
+    /* controll function timer */
     wait_time: 0,
     music_info_interval: null,
     height: 0,
     expanded: false,
     expand_id: 0,
+    info_bar_expanded: false,
+    info_expanded: false,
     last_scroll_pos: 0,
+
     clear_wait: function () {
         ui.wait_time = 0;
         return ui;
@@ -30,13 +33,25 @@ var ui = {
     },
     /* front layer animation */
     layer_load: function () {
+        if(authed) {
+            $("#email").val(user_email);
+            $("#title").html("登出豆瓣<span style='width: .1em'></span>FM");
+            $("#password").val("").hide();
+            $("#login_btn").html("logout");
+        }
+        else {
+            $("#title").html("登陆豆瓣<span style='width: .1em'></span>FM");
+            $("#password").css("display", "initial");
+            $("#login_btn").html("login");
+        }
         setTimeout(function () {
             $("h1#logo").addClass("layer");
             setTimeout(function () {
                 $("#login_form").addClass("play");
+                layer_expanded = true;
             }, 400);
-            return ui;
         }, ui.wait_time);
+        return ui;
     },
     layer_unload: function () {
         setTimeout(function () {
@@ -48,6 +63,7 @@ var ui = {
                 $("h1#logo").removeClass("layer").animate({
                     "opacity": 1
                 }, 400);
+                layer_expanded = false;
             }, 400);
         }, ui.wait_time);
         return ui;
@@ -127,6 +143,7 @@ var ui = {
                 var pos = Math.floor((event.pageY - 50) / 73) + last_scroll_pos;
                 $(".channel_active").removeClass("channel_active");
                 $($("#nav_list li")[pos]).addClass("channel_active");
+                ui.default_info_bar();
                 content().load_channel(pos);
             });
         }, ui.wait_time);
@@ -138,10 +155,16 @@ var ui = {
             var img = new Image();
             img.src = musics[i].picture;
             img.style.width = img.style.height = "200px";
+            img.dataset.num = i;
             img.onload = function () {
                 // TODO
                 var ct = new ColorThief();
-                //console.log(ct.getColor(this));
+                musics[this.dataset.num].color = ct.getPalette(this, 8);
+            };
+            img.onerror = function () {
+                console.log("image 503");
+                this.onerror = null;
+                this.src = this.src + "#reload";
             }
         }
         return ui;
@@ -153,7 +176,7 @@ var ui = {
         $("#tableview_scrollbar_container").scrollTop(0);
 
         for(var i = 0; i < musics.length; ++i) {
-            var cover_element = $("<li id='song_cover_" + i + "' class='song_cover hide'><div class='song_progress_bar'><span class='song_progress_bar_inner'></span></div></li>");
+            var cover_element = $("<li id='song_cover_" + i + "' class='song_cover hide'></li>");
             cover_element.css("background-image", "url(" + musics[i].picture + ")");
             if(i % 2)
                 $("#right_cover_list").append(cover_element);
@@ -201,14 +224,16 @@ var ui = {
                     if($(li).attr("data-delay-delta"))
                         delta = (+$(li).attr("data-delay-delta"));
                     if(pos > ui.last_scroll_pos) {
-                        if (i + delta >= ui.last_scroll_pos)
+                        if (i + delta >= ui.last_scroll_pos) {
                             delay = (i + delta - ui.last_scroll_pos) * 80;
+                        }
                         else
                             delay = 0;
                     }
                     else {
-                        if (i + delta <= ui.last_scroll_pos + 4)
+                        if (i + delta <= ui.last_scroll_pos + 4) {
                             delay = (ui.last_scroll_pos + 4 - i - delta) * 80;
+                        }
                         else
                             delay = 0;
                     }
@@ -236,9 +261,13 @@ var ui = {
                     }
                     setTimeout(function (li) {
                         $(li).css("-webkit-transform", "translateY(-" + inner_scroll_top + "px) translateZ(0)");
-                    }, delay + 80, li);
+                    }, delay + 90, li);
                 }
                 ui.last_scroll_pos = pos;
+                if(ui.expanded &  pos != Math.floor(ui.expand_id / 2))
+                    ui.default_info_bar();
+                else if(ui.expanded)
+                    ui.expand_info_bar();
             };
 
             $("#tableview_scrollbar_container").unbind("scroll").unbind("mousedown").unbind("click").bind("scroll", ui.scroll_animation).bind("mousedown", function (event) {
@@ -352,7 +381,9 @@ var ui = {
         }, 800, callback);
     },
     /* expand the song cover animation */
-    back_to_default_cover: function () {
+    back_to_default_cover: function (need_toggle_info_bar) {
+        if(need_toggle_info_bar !== false)
+            ui.default_info_bar();
         if(!ui.expanded)
             return false;
         ui.expanded = false;
@@ -379,6 +410,26 @@ var ui = {
         }
         ui.height = left_lis.length;
         return true;
+    },
+    expand_info_bar: function () {
+        ui.info_bar_expanded = true;
+        $("#tabbar_info_btn").addClass("expand");
+        setTimeout(function () {
+            $("#tabbar_info_btn").removeClass("uihover");
+        }, 500);
+    },
+    default_info_bar: function () {
+        ui.info_bar_expanded = false;
+        $("#tabbar_info_btn").removeClass("expand")
+        setTimeout(function () {
+            $("#tabbar_info_btn").removeClass("uihover");
+        }, 500);
+    },
+    toggle_info_bar: function () {
+        if(ui.info_bar_expanded)
+            ui.default_info_bar();
+        else
+            ui.expand_info_bar();
     },
     expand_cover: function (id) {
         if(ui.expanded)
@@ -414,6 +465,7 @@ var ui = {
         }
         ui.expanded = true;
         ui.expand_id = id;
+        setTimeout(ui.expand_info_bar, 300);
         return ui;
     },
     /* tabbar load animation */
@@ -480,7 +532,7 @@ var ui = {
                     return;
                 }
                 if(ui.expanded)
-                    ui.back_to_default_cover();
+                    ui.back_to_default_cover(false);
                 if($(this).attr("id") == "prev_btn")
                     content().prev_song();
                 else
@@ -535,13 +587,27 @@ var ui = {
             }).mouseleave(function (event) {
                 var btn_parent = $($("#tabbar .tabbar_icon")[3]);
                 btn_parent.removeClass("active").attr("data-active", "false");
+                if($("#tabbar_info_btn").attr("data-click") !== "true")
+                    $("#tabbar_info_btn").removeClass("uihover");
+            }).mouseenter(function (event) {
+                $("#tabbar_info_btn").addClass("uihover");
             }).click(function (event) {
+                $("#tabbar_info_btn").attr("data-click", "true");
+                setTimeout(function () {
+                    $("#tabbar_info_btn").attr("data-click", "false");
+                }, 500);
                 if(moved) {
                     event.preventDefault();
                     return;
                 }
-                if(!ui.expand_cover(music_now_id))
-                    ui.scroll_to_pos(Math.floor(music_now_id / 2));
+                if (!ui.expand_cover(music_now_id)) {
+                    if (Math.floor(music_now_id / 2) == ui.last_scroll_pos)
+                        ui.toggle_info_bar();
+                    else {
+                        ui.expand_info_bar();
+                        ui.scroll_to_pos(Math.floor(music_now_id / 2));
+                    }
+                }
             });
         }, ui.wait_time);
         return ui;
@@ -617,5 +683,22 @@ var ui = {
         };
         move_func($("#song_info_title"));
         move_func($("#song_info_artist"));
+        move_func($("#album_title"));
+    },
+    /* toggle the information of album */
+    hide_info: function () {
+        if(ui.info_expanded)
+            $("#album_info").removeClass("show");
+        return ui;
+    },
+    toggle_info: function () {
+        if(ui.info_expanded) {
+            $("#album_info").removeClass("show");
+        }
+        else {
+            $("#album_info").html(musics[music_now_id].info).addClass("show");
+        }
+        ui.info_expanded = !ui.info_expanded;
+        return ui;
     }
 }

@@ -109,6 +109,17 @@
     opacity: 1;
   }
 }
+@-webkit-keyframes heart-beat {
+  0% {
+    -webkit-transform: scale(1, 1);
+  }
+  20% {
+    -webkit-transform: scale(1.1, 1.1);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+}
 #login_form.play {
   display: block;
   opacity: 0;
@@ -183,7 +194,7 @@ ul#left_cover_list li.hide, ul#right_cover_list li.hide {
   opacity: 1;
 }
 #tabbar .tabbar_icon span {
-  -webkit-transition: background .3s ease, color .3s ease;
+  -webkit-transition: all .3s ease;
 }
 #control_btns div {
   -webkit-transition: background .2s ease, -webkit-transform .3s cubic-bezier(.85,-0.19,.58,1.67);
@@ -256,14 +267,53 @@ ul#left_cover_list li.hide, ul#right_cover_list li.hide {
   -webkit-transform: scale(1, 1) rotateZ(0);
   opacity: 1;
 }
+.song_progress_bar {
+  -webkit-transition: height .5s linear;
+}
 .song_progress_bar_inner {
-  -webkit-transition: -webkit-transform .3s linear;
-  -webkit-transform: scaleX(0);
-  -webkit-transform-origin-x: left;
+  -webkit-transition: width 1s linear;
 }
 #login_form button {
   -webkit-transition: background .4s ease;
 }
 #cover_control_icons {
   -webkit-transition: bottom .5s ease;
+}
+#tabbar_info_btn {
+  -webkit-transition: all .5s ease;
+}
+#song_info {
+  -webkit-transition: all .5s ease;
+}
+#tabbar #tabbar_info_btn #cover_control_icons {
+  -webkit-transition: opacity .5s ease;
+}
+#tabbar #tabbar_info_btn #cover_control_icons svg {
+  -webkit-transition: left .5s ease;
+}
+#tabbar .tabbar_icon span.icon_bg {
+  -webkit-transition: background-color .5s ease, box-shadow .5s ease;
+}
+#star path {
+  -webkit-transition: opacity .2s ease;
+}
+#star_bg:before, #star_bg:after {
+  -webkit-transition: opacity .2s ease, -webkit-transform .5s ease;
+}
+#tabbar .tabbar_icon .star-1 span#star_bg.icon_bg:hover:before {
+  opacity: 1;
+  -webkit-transform: rotateZ(45deg);
+}
+#tabbar .tabbar_icon .star-1 span#star_bg.icon_bg:hover:after {
+  opacity: 1;
+  -webkit-transform: rotateZ(-45deg);
+}
+.star-1 #star {
+  -webkit-animation: heart-beat 1.2s ease infinite;
+}
+#album_info {
+  -webkit-transition: opacity .5s ease, padding-top .8s ease, top .5s ease;
+}
+#extra_info {
+  -webkit-transition: opacity .5s ease, right .5s ease;
 }
