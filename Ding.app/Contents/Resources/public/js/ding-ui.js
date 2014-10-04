@@ -109,7 +109,7 @@ var ui = {
             var scroll_animation = function () {
                 var scroll_dis = $(this).scrollTop();
                 //$("#nav_list").css("-webkit-transform", "translateY(" + scroll_dis + "px)");
-                var pos = Math.floor(($(this).scrollTop() / 500.) * (lis.length - 5));
+                var pos = Math.floor(($(this).scrollTop() / 500.) * (lis.length - 4));
                 inner_scroll_top = pos * 73;
                 if(pos === last_scroll_pos) {
                     return;
@@ -373,9 +373,15 @@ var ui = {
     remove_musics: function (callback) {
         music_now = {};
         $("#left_cover_list .song_cover").addClass("ease_scroll")
-            .css("-webkit-transform", "translateY(-" + ((ui.height + 3) * 200) + "px) translateZ(0)");
+            .css({
+                "-webkit-transform": "translateY(-" + ((ui.height + 3) * 200) + "px) translateZ(0) scale(.8, .8)",
+                "opacity": 0
+            });
         $("#right_cover_list .song_cover").addClass("ease_scroll")
-            .css("-webkit-transform", "translateY(-" + ((ui.height + 4) * 200) + "px) translateZ(0)");
+            .css({
+                "-webkit-transform": "translateY(-" + ((ui.height + 8) * 200) + "px) translateZ(0) scale(.8, .8)",
+                "opacity": 0
+            });
         setTimeout(function (callback) {
             callback();
         }, 800, callback);
@@ -620,8 +626,9 @@ var ui = {
                     event.preventDefault();
                     return;
                 }
-                if(MacGap)
-                    MacGap.terminate();
+                if(macgap) {
+                    macgap.app.terminate();
+				}
             });
             setTimeout(function () {
                 $("#mute_btn").addClass("play");

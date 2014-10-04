@@ -344,6 +344,9 @@ li.song_cover {
   opacity: 0;
   -webkit-transform: translateZ(0) scale(1, 1) rotateZ(0);
 }
+#song_info {
+  padding: 0 10px;
+}
 #tabbar .tabbar_icon span#song_info span {
   position: relative;
   display: block;
@@ -382,8 +385,8 @@ li.song_cover {
   position: absolute;
   top: 70px;
   width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, .8);
+  height: 5px;
+  background: rgba(255, 255, 255, 0);
 }
 #tabbar .tabbar_icon span.song_progress_bar_inner {
   position: absolute;
@@ -392,7 +395,7 @@ li.song_cover {
   background: rgba(0, 31, 63, 0.9);
 }
 .expand .song_progress_bar {
-  height: 5px;
+  background: rgba(255, 255, 255, .8);
 }
 #login_form {
   position: absolute;
@@ -440,6 +443,7 @@ li.song_cover {
   font-family: Helvetica, Arial, Sans-serif;
 }
 #tabbar #tabbar_info_btn.tabbar_icon {
+  margin-top: 12px;
   height: 70px;
 }
 #tabbar_info_btn.expand {
@@ -491,8 +495,8 @@ svg#star {
   width: 30px;
 }
 svg#trash {
-  left: 0px;
   top: 8px;
+  left: 0px;
 }
 #tabbar #tabbar_info_btn #cover_control_icons {
   opacity: 0;
@@ -651,4 +655,18 @@ h1#logo span#close_layer {
 h1#logo span#close_layer:hover {
   cursor: pointer;
   color: #600f10;
+}
+#volume_control {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  top: -50px;
+  z-index: 1;
+}
+#mute_btn {
+  z-index: 2;
+}
+#volume_control.expand {
+  background: rgba(255, 255, 255, .85);
+  top: 0;
 }

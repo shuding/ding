@@ -67,7 +67,7 @@ function content($scope) {
         }
         if (content_scope.jump_to_album_website === undefined) {
             content_scope.jump_to_album_website = function () {
-                MacGap && MacGap.openURL("http://music.douban.com" + music_now.album);
+                macgap && macgap.app.open("http://music.douban.com" + music_now.album);
             }
         }
         if (content_scope.close_layer === undefined) {
@@ -236,10 +236,10 @@ function content($scope) {
         });
     };
     var drag_func = function () {
-        if(MacGap === undefined)
+        if(macgap === undefined)
             return;
         on_drag = false;
-        window_pos = [Math.abs(MacGap.Window.x), Math.abs(MacGap.Window.y)];
+        window_pos = [Math.abs(macgap.window.getX()), Math.abs(macgap.window.getY())];
         $(document).mousedown(function (event) {
             on_drag = true;
             moved = false;
@@ -256,7 +256,10 @@ function content($scope) {
 
                 window_pos[0] += dx;
                 window_pos[1] -= dy;
-                MacGap.Window.move(window_pos[0], window_pos[1]);
+				macgap.window.move({
+					"x": window_pos[0],
+					"y": window_pos[1]
+				});
             }
         });
     };
