@@ -4,6 +4,8 @@ Author: Shu Ding <ds303077135@gmail.com>.
 
 The first beta version of Ding.app!
 
+[Design notes](http://shud.in/blog/articles/ding-the-app/).
+
 ### v0.08:
 
 - Play / pause / prev / next / play modes
