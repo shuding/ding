@@ -1,5 +1,23 @@
 豆瓣 FM 客户端 / OS X 10.7 or later / beta.
 
+[下载](https://github.com/quietshu/ding/releases)
+
+## Screenshots
+
+### Startup Animation
+
+![Startup Animation](images/ding_startup.gif)
+
+### UI Design
+
+![1](images/1.png)
+
+![2](images/2.png)
+
+![3](images/3.png)
+
+![4](images/4.png)
+
 Author: Shu Ding <ds303077135@gmail.com>.
 
 The first beta version of Ding.app!
@@ -38,18 +56,3 @@ Discussions & questions are welcome!
 
 The MIT license.
 
-## Screenshots
-
-### Startup Animation
-
-![Startup Animation](images/ding_startup.gif)
-
-### UI Design
-
-![1](images/1.png)
-
-![2](images/2.png)
-
-![3](images/3.png)
-
-![4](images/4.png)
