@@ -1,6 +1,6 @@
 豆瓣 FM 客户端 / OS X 10.7 or later / beta.
 
-[下载](https://github.com/quietshu/ding/releases)
+[Beta 1 下载](https://github.com/quietshu/ding/releases)（解压 dmg，直接运行即可~）
 
 ## Screenshots
 
