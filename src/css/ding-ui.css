@@ -168,6 +168,9 @@ ul#nav_list li.list_end span {
   width: 200px;
   height: 400px;
   top: 0;
+  -webkit-perspective: 600px;
+  -webkit-perspective-origin-x: 200px;
+
 }
 #left_cover_list {
   left: 0;
@@ -181,6 +184,9 @@ li.song_cover {
   height: 200px;
   background-size: cover;
   background-color: #fff;
+}
+li.song_cover.trash {
+  -webkit-transform: translateY(200px) translateZ(-100px) rotateX(-10deg) !important;
 }
 #left_cover_list li.song_cover.expand {
   width: 400px;
@@ -392,17 +398,18 @@ li.song_cover {
   position: absolute;
   right: inherit;
   height: 100%;
+  width: 0;
   background: rgba(0, 31, 63, 0.9);
 }
 .expand .song_progress_bar {
-  background: rgba(255, 255, 255, .8);
+  background: rgba(255, 255, 255, .95);
 }
 #login_form {
   position: absolute;
   display: none;
   top: 0;
   left: 0;
-  width: 600px;
+  width: 100%;
   height: 300px;
   margin-top: 80px;
   line-height: 50px;
@@ -669,4 +676,29 @@ h1#logo span#close_layer:hover {
 #volume_control.expand {
   background: rgba(255, 255, 255, .85);
   top: 0;
+}
+#lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000000000000;
+  pointer-events: none;
+}
+#light-1 {
+  position: absolute;
+  top: -100px;
+  width: 100%;
+  height: 100px;
+  border-radius: 100%;
+  box-shadow: 0 0 100px rgba(0, 0, 0, .2);
+}
+#light-2 {
+  position: absolute;
+  bottom: -100px;
+  width: 100%;
+  height: 100px;
+  border-radius: 100%;
+  box-shadow: 0 0 100px rgba(0, 0, 0, .2);
 }

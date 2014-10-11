@@ -15,6 +15,9 @@
 </head>
 <body ng-controller="content">
 <div id="content">
+  <div id="lights">
+    <span id="light-1"></span><span id="light-2"></span><span id="light-3"></span><span id="light-4"></span><span id="light-5"></span>
+  </div>
   <h1 id="logo" ng-click="open_layer()"><span>D</span><span>i</span><span>n</span><span>g</span>
     <form id="login_form">
       <span id="title">登陆豆瓣<span style="width: .1em"></span>FM</span>
@@ -83,7 +86,7 @@
       <div id="cover_control_icons" class="star-{{ music_now.like }}">
         <span id="more_info_bg" class="icon_bg" ng-click="more_info()"></span>
         <span id="star_bg" class="icon_bg" ng-click="toggle_star()"></span>
-        <span id="trash_bg" class="icon_bg"></span>
+        <span id="trash_bg" class="icon_bg" ng-click="trash_song()"></span>
         <svg id="more_info">
           <path id="full" fill="#001F3F" d="M4.082,4.083v2.999h22.835V4.083H4.082zM4.082,20.306h22.835v-2.999H4.082V20.306zM4.082,13.694h22.835v-2.999H4.082V13.694zM4.082,26.917h22.835v-2.999H4.082V26.917z"></path>
         </svg>

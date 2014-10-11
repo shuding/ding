@@ -11,7 +11,7 @@ var layer_expanded = true;
 var content_scope, channel_index = 0;
 var update_current_time_interval;
 var shuffle_queue = [], shuffle_no = 0;
-var audio_preload = new Audio("");
+var audio_preload = null;
 
 var app = angular.module("ding", []);
 
@@ -65,6 +65,11 @@ function content($scope) {
                     ui.toggle_info();
             }
         }
+        if (content_scope.trash_song === undefined) {
+            content_scope.trash_song = function () {
+                $("#song_cover_" + music_now_id).addClass("trash");
+            }
+        }
         if (content_scope.jump_to_album_website === undefined) {
             content_scope.jump_to_album_website = function () {
                 macgap && macgap.app.open("http://music.douban.com" + music_now.album);
@@ -104,6 +109,26 @@ function content($scope) {
     };
 
     var init_func = function () {
+
+        // media keys in keyboard handler
+        document.addEventListener("play", function () {
+            toggle_play_func();
+        });
+        document.addEventListener("next", function () {
+            if(ui.expanded)
+                ui.back_to_default_cover(false);
+            next_song_func();
+            ui.expand_cover(music_now_id);
+            ui.change_app_background(musics[music_now_id].picture);
+        });
+        document.addEventListener("prev", function () {
+            if(ui.expanded)
+                ui.back_to_default_cover(false);
+            prev_song_func();
+            ui.expand_cover(music_now_id);
+            ui.change_app_background(musics[music_now_id].picture);
+        });
+
         $("#login_form").submit(function () {
             console.log(authed);
             if(authed) {
@@ -126,20 +151,24 @@ function content($scope) {
                     }, 400);
                 });
         });
+
+        music_audio_object = new Audio("");
+        music_audio_object.preload = "auto";
+        audio_preload = new Audio("");
+        audio_preload.preload = "auto";
     };
 
     var require_login_func = function (callback) {
         // init model
-        music_audio_object = new Audio("");
         $(music_audio_object).bind("loadstart", function () {
             console.log("start to load music");
         }).bind("canplay", function () {
             music_audio_object.currentTime = musics[music_now_id].current_time | 0;
             ui.music_info_animation();
             play_music();
-            preload_next();
         }).bind("ended", function () {
             if(play_mode == 0) {
+                musics[music_now_id].current_time = 0;
                 next_song_func();
                 if(ui.expanded)
                     ui.back_to_default_cover();
@@ -156,7 +185,7 @@ function content($scope) {
                 else
                     next_song_func();
             }
-        });
+        }).bind("canplaythrough", preload_next);
 
         network.get_musics(function () {
             // load UI
@@ -182,16 +211,12 @@ function content($scope) {
 
     var load_func = function () {
         // init model
-        music_audio_object = new Audio("");
         $(music_audio_object).bind("loadstart", function () {
             console.log("start to load music");
-            console.log(music_audio_object.networkState);
         }).bind("canplay", function () {
-            console.log("can play");
             music_audio_object.currentTime = musics[music_now_id].current_time | 0;
             ui.music_info_animation();
             play_music();
-            preload_next();
         }).bind("ended", function () {
             network.post_end_of_song(music_now.sid);
             if(play_mode == 0) {
@@ -207,13 +232,12 @@ function content($scope) {
                 this.play();
             }
             else {
-                if(shuffle_no == shuffle_queue.length) {
+                if(shuffle_no == shuffle_queue.length)
                     load_channel_func(channel_index);
-                }
                 else
                     next_song_func();
             }
-        });
+        }).bind("canplaythrough", preload_next);
 
         channel_now = -3;
         network.get_musics(function () {
@@ -293,6 +317,7 @@ function content($scope) {
     var load_music = function (no) {
         console.log("load music");
         music_audio_object.src = musics[no].url;
+
         if(musics[no].info == undefined)
             setTimeout(function() {
                 network.get_music_info(no);
@@ -316,11 +341,15 @@ function content($scope) {
     var change_play_no_func = function (no) {
         if(music_now === musics[no])
             return false;
+        if(music_playing)
+            pause_music();
         music_now_id = no;
         music_now = musics[no];
         content_scope.music_now = music_now;
         music_playing = false;
         content_scope.playing = music_playing;
+        if (music_now.color)
+            ui.set_app_background_shadow(music_now.color[0]);
         content_scope.$apply();
         load_music(no);
         ui.clear_wait().music_info_animation();
@@ -349,13 +378,7 @@ function content($scope) {
         else if(music_now_id + 1 < musics.length)
             next_index = music_now_id + 1;
         if (next_index !== -1) {
-            return;
-            /*
-            setTimeout(function (next_index) {
-                var url = musics[next_index].url;
-                audio_preload.src = url;
-            }, 0, next_index);
-            */
+            audio_preload.src = musics[next_index].url;
         }
     };
     var load_channel_func = function (id) {

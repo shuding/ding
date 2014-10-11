@@ -472,6 +472,24 @@ var ui = {
         ui.expanded = true;
         ui.expand_id = id;
         setTimeout(ui.expand_info_bar, 300);
+
+        /*
+        * a test for window resize animation
+        * */
+
+        /*
+        if (macgap) {
+            $("#tableview").animate({
+                left: 0
+            }, 1000);
+            setTimeout(function () {
+                macgap.window.resize({
+                    width: 400,
+                    height: 400
+                });
+            }, 1000);
+        }*/
+
         return ui;
     },
     /* tabbar load animation */
@@ -655,6 +673,10 @@ var ui = {
                     "background-color": "rgba(255, 255, 255, 0.15)"
                 });
         }, ui.wait_time);
+        return ui;
+    },
+    set_app_background_shadow: function (rgb) {
+        $("#background").css("background-color", "rgba(" + rgb.join(",") + ", .2)");
         return ui;
     },
     change_app_background: function (img_src) {

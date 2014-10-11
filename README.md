@@ -2,9 +2,16 @@
 
 Author: Shu Ding <ds303077135@gmail.com>.
 
-The first beta version of Ding.app!
+The first beta version of Ding.app: [beta 1 v0.08 pre-release](https://github.com/quietshu/ding/releases).
 
-### v0.08:
+![2](images/2.png)
+
+### v0.09 change log:
+
+- **Keyboard media hot keys control :)** - 2014.10.11
+- UI small changes
+
+v0.08:
 
 - Play / pause / prev / next / play modes
 - Login / logout
@@ -12,13 +19,13 @@ The first beta version of Ding.app!
 - Like action
 - Lyrics
 
+
 ### Todos:
 
 - Trash a song
 - Volume
 - UI settings
 - Mini window
-- Keyboard shortcuts control
 - More light & shadow effects
 - Last.fm supporting
 - Chrome extension
@@ -29,6 +36,7 @@ Discussions & questions are welcome!
 ## Acknowledgements
 
 - Packaged by [MacGap](https://github.com/MacGapProject/MacGap1)
+- SPMediaKeyTap
 - AngularJS
 - jQuery
 
@@ -36,7 +44,7 @@ Discussions & questions are welcome!
 
 The MIT license.
 
-## Screenshots
+## More Screenshots
 
 ### Startup Animation
 
@@ -45,8 +53,6 @@ The MIT license.
 ### UI Design
 
 ![1](images/1.png)
-
-![2](images/2.png)
 
 ![3](images/3.png)
 
