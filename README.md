@@ -1,15 +1,15 @@
 豆瓣 FM 客户端 / OS X 10.7 or later / beta.
 
-Author: Shu Ding <ds303077135@gmail.com>.
-
 The first beta version of Ding.app: [beta 1 v0.08 pre-release](https://github.com/quietshu/ding/releases).
 
 ![2](images/2.png)
 
+Author: Shu Ding <ds303077135@gmail.com>. [Design notes](http://shud.in/blog/articles/ding-the-app/).
+
 ### v0.09 change log:
 
 - **Keyboard media hot keys control :)** - 2014.10.11
-- UI small changes
+- Some small UI changes
 
 v0.08:
 
@@ -44,6 +44,7 @@ Discussions & questions are welcome!
 
 The MIT license.
 
+<<<<<<< HEAD
 ## More Screenshots
 
 ### Startup Animation
