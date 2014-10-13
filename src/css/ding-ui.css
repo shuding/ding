@@ -702,3 +702,10 @@ h1#logo span#close_layer:hover {
   border-radius: 100%;
   box-shadow: 0 0 100px rgba(0, 0, 0, .2);
 }
+#lastfm {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+}

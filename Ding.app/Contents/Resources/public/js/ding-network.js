@@ -44,7 +44,7 @@ var network = {
             });
         });
     },
-    load_channels: function (callback) {
+    loadChannels: function (callback) {
         if(authed) {
             network.get_user_channels(callback);
             return;
@@ -103,7 +103,7 @@ var network = {
                 $("#password").val("").hide();
                 $("#login_btn").html("logout");
 
-                network.load_channels(callback);
+                network.loadChannels(callback);
 
             }
         });

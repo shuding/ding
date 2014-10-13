@@ -2,18 +2,21 @@
  * This is the main JavaScript file of Ding.app
  * Create by quietshu@gmail.com at 2014.9.14
  * */
-var new_user = true;
+var newUser = true;
 var authed = false, token, expire, user_name, user_email, user_id;
 
 $(window).load(function() {
 
     if(window.localStorage) {
-        if(window.localStorage["new_user"])
-            new_user = false;
-        else
-            window.localStorage["new_user"] = true;
 
-        if(window.localStorage["authed"] === "true") {
+        if (window.localStorage["newUser"]) {
+            newUser = false;
+        }
+        else {
+            window.localStorage["newUser"] = true;
+        }
+
+        if (window.localStorage["authed"] === "true") {
             authed = true;
             token = window.localStorage.token;
             expire = window.localStorage.expire;
@@ -21,14 +24,16 @@ $(window).load(function() {
             user_email = window.localStorage.user_email;
             user_id = window.localStorage.user_id;
         }
-        else
+        else {
             authed = false;
+        }
     }
 
-    new_user = true;
+    newUser = true;
 
     content().init();
-    if(!authed) { //new_user) {
+
+    if (!authed) {
         content().require_login();
     }
     else {
