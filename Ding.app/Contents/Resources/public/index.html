@@ -10,6 +10,7 @@
   <script src="js/color-thief.min.js"></script>
   <script src="js/ding-network.js"></script>
   <script src="js/ding-ui.js"></script>
+  <script src="js/ding-music.js"></script>
   <script src="js/ding-controller.js"></script>
   <script src="js/ding-main.js"></script>
 </head>
@@ -20,7 +21,7 @@
   </div>
   <h1 id="logo" ng-click="open_layer()"><span>D</span><span>i</span><span>n</span><span>g</span>
     <div id="lastfm"></div>
-    <form id="login_form">
+    <form id="login-form">
       <span id="title">登陆豆瓣<span style="width: .1em"></span>FM</span>
       <input id="email" type="email" placeholder="your email">
       <input id="password" type="password" placeholder="your password">
@@ -30,7 +31,7 @@
   </h1>
   <div id="background" class="fullsize"></div>
   <nav id="navigation">
-    <div id="scrollbar_container" class="fullsize scrollbar_container">
+    <div id="scrollbar-container" class="fullsize scrollbar-container">
       <div id="scrollbar" class="scrollbar"></div>
     </div>
     <ul id="nav_list" class="fullsize">
@@ -38,12 +39,12 @@
   </nav>
   <div id="tableview">
     <span id="album_info"></span>
-    <div id="tableview_scrollbar_container" class="fullsize scrollbar_container">
+    <div id="tableview_scrollbar-container" class="fullsize scrollbar-container">
       <div id="tableview_scrollbar" class="scrollbar"></div>
     </div>
-    <ul id="left_cover_list">
+    <ul id="left-cover-list">
     </ul>
-    <ul id="right_cover_list">
+    <ul id="right-cover-list">
     </ul>
   </div>
   <div id="control_btns">
@@ -82,7 +83,7 @@
           <path fill="#001F3F" d="M1,4.997h4L8.508,9.8l1.258-1.631c0,0-3.512-4.848-3.766-5.171H1c-0.552,0-1,0.534-1,1.08C0,4.624,0.448,4.997,1,4.997z M22.528,15.163c-0.298-0.295-1.23-0.217-1.528,0.078l0,2.756h-4l-3.535-4.839l-1.258,1.631L16,19.906h5l0,2.872c0.298,0.295,1.23,0.164,1.528-0.131l4.242-3.207c0.298-0.295,0.298-0.774,0-1.069L22.528,15.163z M21,4.997v2.688c0.298,0.295,1.23,0.418,1.528,0.123l4.242-3.207c0.298-0.295,0.298-0.774,0-1.069l-4.242-3.207C22.23,0.029,21.298-0.141,21,0.154v2.844h-5l-11,15H1c-0.552,0-1,0.373-1,0.92c0,0.546,0.448,1.08,1,1.08h5l11-15H21z"/>
         </svg></span>
     </div>
-    <div id="tabbar_info_btn" class="tabbar_icon playing_{{ playing }}">
+    <div id="tabbar-info-btn" class="tabbar_icon playing_{{ playing }}">
       <div class='song_progress_bar'><span class='song_progress_bar_inner'></span></div>
       <div id="cover_control_icons" class="star-{{ music_now.like }}">
         <span id="more_info_bg" class="icon_bg" ng-click="more_info()"></span>

@@ -15,6 +15,15 @@ var audio_preload = null;
 
 var app = angular.module("ding", []);
 
+/**
+ * The app main controller
+ *
+ * @param {Object} $scope angular controller scope
+ */
+function controller($scope) {
+    $scope.music = musicControl;
+}
+
 function content($scope) {
     if($scope)
         content_scope = $scope;
@@ -47,7 +56,7 @@ function content($scope) {
                 $("#album").animate({
                     "scrollTop": s
                 }, 800);
-            }
+            };
         }
         if (content_scope.toggle_star === undefined) {
             content_scope.toggle_star = function () {
@@ -133,7 +142,7 @@ function content($scope) {
             ui.changeContentBackground(musics[music_now_id].picture);
         });
 
-        $("#login_form").submit(function () {
+        $("#login-form").submit(function () {
             console.log(authed);
             if(authed) {
 
@@ -193,7 +202,7 @@ function content($scope) {
             }
         }).bind("canplaythrough", preload_next);
 
-        network.get_musics(function () {
+        network.loadMusics(function () {
             // load UI
             generate_shuffle_sequence();
 
@@ -246,7 +255,7 @@ function content($scope) {
         }).bind("canplaythrough", preload_next);
 
         channel_now = -3;
-        network.get_musics(function () {
+        network.loadMusics(function () {
             generate_shuffle_sequence();
             // load UI
             network.loadChannels(function() {
@@ -393,10 +402,10 @@ function content($scope) {
         ui.clearWaitingTime().wait(500).loadContentBackground("#fff", true);
         setTimeout(function () {
             ui.removeMusics(function () {
-                $("#left_cover_list, #right_cover_list").html("");
+                $("#left-cover-list, #right-cover-list").html("");
                 musics = [];
                 channel_now = channels[id]["channel_id"];
-                network.get_musics(function () {
+                network.loadMusics(function () {
                     generate_shuffle_sequence();
 
                     ui.clearWaitingTime().loadColorThief().loadTableview(musics).wait(500);
@@ -422,6 +431,6 @@ function content($scope) {
         init: init_func
     };
     return ret_obj;
-};
+}
 
 app.controller("content", content);

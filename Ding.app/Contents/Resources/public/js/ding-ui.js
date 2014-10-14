@@ -5,6 +5,8 @@
 
 var ui = (function () {
 
+// private
+
     var waitingTime = 0,
         coversRowNumber = 0,
         expandId = 0,
@@ -12,7 +14,51 @@ var ui = (function () {
         infoBarExpanded = false,
         infoExpanded = false,
         lastScrollPosition = 0,
-        musicInfoInterval = null;
+        musicInfoIntervals = [];
+
+    /**
+     * Receive error message and report it (console.log for now)
+     *
+     * @method reportError
+     * @param {String} err
+     * @private
+     */
+    var reportError = function (err) {
+        console.log("ERROR: " + err.toString());
+    };
+
+    /**
+     * Information text moving animation
+     * new anim interval will be pushed to musicInfoIntervals
+     *
+     * @method autoMove
+     * @param span
+     * @private
+     */
+    var autoMove = function (span) {
+        var widthDiff = span[0].scrollWidth - span.width();
+
+        if(widthDiff <= 0)
+            return;
+
+        var animFunc = function (span) {
+            span.animate({
+                scrollLeft: widthDiff + "px"
+            }, 3000, 'linear');
+            setTimeout(function (span) {
+                span.animate({
+                    scrollLeft: 0
+                }, 3000, 'linear');
+            }, 5000, span);
+        };
+        animFunc(span);
+
+        var inte = setInterval(animFunc, 10000, span);
+        musicInfoIntervals.push(inte);
+    };
+
+
+// public
 
     var retObject = {
 
@@ -24,6 +70,7 @@ var ui = (function () {
          */
         clearWaitingTime: function () {
             waitingTime = 0;
+
             return this;
         },
 
@@ -44,10 +91,10 @@ var ui = (function () {
          * @return {Element} navListEl
          */
         removeChannels: function () {
-            "use strict";
-
             var navListEl = $("#nav_list");
-            $(navListEl.html("").find("li")[0]).removeClass("channel_active");
+
+            $(navListEl.html("").find("li")[0]).removeClass("channel-active");
+
             return navListEl;
         },
 
@@ -59,11 +106,14 @@ var ui = (function () {
          */
         loadChannels: function () {
             var channelParentElement = this.removeChannels();
-            for (var i = 0; i < channels.length; ++i) {
-                channelParentElement.append($("<li class='hide'><span>" + channels[i]["name"] + "</span></li>"));
+
+            for (channel in channels) {
+                channelParentElement.append($("<li class='hide'><span>" + channels[channel].name + "</span></li>"));
             }
-            channelParentElement.append($("<li class='hide list_end'><span>E.N.D</span></li>"));
-            $(channelParentElement.find("li")[0]).addClass("channel_active");
+
+            channelParentElement.append($("<li class='hide list-end'><span>E.N.D</span></li>"));
+            $(channelParentElement.find("li")[0]).addClass("channel-active");
+
             return this;
         },
 
@@ -71,11 +121,12 @@ var ui = (function () {
          * Add a animation delay
          *
          * @method wait
-         * @param  {Number} t, millisecond
+         * @param  {Number} t millisecond
          * @return {Object} self
          */
         wait: function (t) {
             waitingTime += t;
+
             return this;
         },
 
@@ -98,9 +149,9 @@ var ui = (function () {
                 $("#login_btn").html("login");
             }
             setTimeout(function () {
-                $("h1#logo").addClass("layer");
+                $("#logo").addClass("layer");
                 setTimeout(function () {
-                    $("#login_form").addClass("play");
+                    $("#login-form").addClass("play");
                     layer_expanded = true; // TODO
                 }, 400);
             }, waitingTime);
@@ -115,17 +166,18 @@ var ui = (function () {
          */
         closeLayer: function () {
             setTimeout(function () {
-                $("h1#logo").animate({
+                $("#logo").animate({
                     "opacity": 0
                 }, 400);
                 setTimeout(function () {
-                    $("#login_form").removeClass("play");
-                    $("h1#logo").removeClass("layer").animate({
+                    $("#login-form").removeClass("play");
+                    $("#logo").removeClass("layer").animate({
                         "opacity": 1
                     }, 400);
                     layer_expanded = false;
                 }, 400);
             }, waitingTime);
+
             return this;
         },
 
@@ -138,9 +190,8 @@ var ui = (function () {
         loadLogo: function () {
             setTimeout(function () {
                 $("#logo").addClass("play");
-                //var logo_sound = new Audio('./sound/logo.wav');
-                //logo_sound.play();
             }, waitingTime);
+
             return this;
         },
 
@@ -154,6 +205,7 @@ var ui = (function () {
             setTimeout(function () {
                 $("#logo").removeClass("play").addClass("fix");
             }, waitingTime);
+
             return this;
         },
 
@@ -167,6 +219,7 @@ var ui = (function () {
             setTimeout(function () {
                 $("#background").addClass("play");
             }, waitingTime);
+
             return this;
         },
 
@@ -179,10 +232,10 @@ var ui = (function () {
         loadNavigation: function () {
             setTimeout(function () {
                 $("#navigation").addClass("play");
-                var lis = $("#nav_list li");
+                var lis = $("#nav_list").find("li");
                 var lastScrollPosition = 0;
                 var inner_scroll_top;
-                for(var i = 0; i < lis.length; ++i) {
+                for (var i = 0; i < lis.length; ++i) {
                     setTimeout(function (li) {
                         $(li).removeClass("hide");
                         setTimeout(function () {
@@ -191,7 +244,7 @@ var ui = (function () {
                     }, 100 * i, lis[i]);
                 }
                 var scroll_animation = function () {
-                    var scroll_dis = $("#scrollbar_container").scrollTop();
+                    var scroll_dis = $("#scrollbar-container").scrollTop();
                     //$("#nav_list").css("-webkit-transform", "translateY(" + scroll_dis + "px)");
                     var pos = Math.floor((scroll_dis / 500.) * (lis.length - 4));
                     inner_scroll_top = pos * 73;
@@ -219,18 +272,19 @@ var ui = (function () {
                     }
                     lastScrollPosition = pos;
                 };
-                $("#scrollbar_container").unbind("scroll").unbind("click").bind("scroll", scroll_animation).bind("click", function (event) {
+                $("#scrollbar-container").unbind("scroll").unbind("click").bind("scroll", scroll_animation).bind("click", function (event) {
                     if(moved) {
                         event.preventDefault();
                         return;
                     }
                     var pos = Math.floor((event.pageY - 50) / 73) + lastScrollPosition;
-                    $(".channel_active").removeClass("channel_active");
-                    $($("#nav_list li")[pos]).addClass("channel_active");
+                    $(".channel-active").removeClass("channel-active");
+                    $($("#nav_list li")[pos]).addClass("channel-active");
                     retObject.closeInfoBar();
                     content().load_channel(pos);
                 });
             }, waitingTime);
+
             return this;
         },
 
@@ -241,22 +295,27 @@ var ui = (function () {
          * @return {Object} self
          */
         loadColorThief: function () {
-            for(var i = 0; i < musics.length; ++i) {
+            var imgOnload = function () {
+                // TODO
+                var ct = new ColorThief();
+                musics[this.dataset.num].color = ct.getPalette(this, 8);
+            };
+
+            var imgOnerror = function () {
+                this.onerror = null;
+                this.src = this.src + "#reload";
+                reportError("cover image 503. reloading...");
+            };
+
+            for (music in musics) {
                 var img = new Image();
-                img.src = musics[i].picture;
+                img.src = musics[music].picture;
                 img.style.width = img.style.height = "200px";
-                img.dataset.num = i;
-                img.onload = function () {
-                    // TODO
-                    var ct = new ColorThief();
-                    musics[this.dataset.num].color = ct.getPalette(this, 8);
-                };
-                img.onerror = function () {
-                    console.log("image 503");
-                    this.onerror = null;
-                    this.src = this.src + "#reload";
-                }
+                img.dataset.num = music;
+                img.onload = imgOnload;
+                img.onerror = imgOnerror;
             }
+
             return this;
         },
 
@@ -270,22 +329,19 @@ var ui = (function () {
         loadTableview: function (musics) {
             expanded = false;
             lastScrollPosition = 0;
-            $("#tableview_scrollbar_container").scrollTop(0);
+            $("#tableview_scrollbar-container").scrollTop(0);
 
             for(var i = 0; i < musics.length; ++i) {
-                var cover_element = $("<li id='song_cover_" + i + "' class='song_cover hide'></li>");
-                cover_element.css("background-image", "url(" + musics[i].picture + ")");
-                if(i % 2)
-                    $("#right_cover_list").append(cover_element);
-                else
-                    $("#left_cover_list").append(cover_element);
+                $("<li id='song_cover_" + i + "' class='song_cover hide'></li>")
+                        .css("background-image", "url(" + musics[i].picture + ")")
+                        .appendTo($((i % 2 ? "#right" : "#left") + "-cover-list"));
             }
-            coversRowNumber = musics.length / 2;
+            coversRowNumber = musics.length >> 1;
 
             setTimeout(function () {
                 $("#tableview").addClass("play");
-                var left_covers = $("#left_cover_list .song_cover"),
-                    right_covers = $("#right_cover_list .song_cover");
+                var left_covers = $("#left-cover-list .song_cover"),
+                    right_covers = $("#right-cover-list .song_cover");
                 for(var i = 0; i < left_covers.length; ++i) {
                     setTimeout(function (cover) {
                         cover.removeClass("hide");
@@ -308,7 +364,7 @@ var ui = (function () {
                 var inner_scroll_top;
                 var show_control_btn = false;
                 scroll_animation = function () {
-                    var scroll_dis = $("#tableview_scrollbar_container").scrollTop();
+                    var scroll_dis = $("#tableview_scrollbar-container").scrollTop();
                     var pos = Math.floor((scroll_dis / 450.) * (coversRowNumber - 2));
                     inner_scroll_top = pos * 200;
                     if(pos == lastScrollPosition)
@@ -366,7 +422,7 @@ var ui = (function () {
                         retObject.expandInfoBar();
                 };
 
-                $("#tableview_scrollbar_container").unbind("scroll").unbind("mousedown").unbind("click").bind("scroll", scroll_animation).bind("mousedown", function (event) {
+                $("#tableview_scrollbar-container").unbind("scroll").unbind("mousedown").unbind("click").bind("scroll", scroll_animation).bind("mousedown", function (event) {
                     var pos = Math.floor(event.pageY / 200) + lastScrollPosition;
                     var pos_x = (event.pageX < 300) ? 0 : 1;
                     var no = pos * 2 + pos_x;
@@ -463,19 +519,19 @@ var ui = (function () {
         scrollToPos: function (pos) {
             if(pos == lastScrollPosition)
                 return this;
-            $("#tableview_scrollbar_container").scrollTop(Math.ceil(450 * (pos) / (coversRowNumber - 2)));
+            $("#tableview_scrollbar-container").scrollTop(Math.ceil(450 * (pos) / (coversRowNumber - 2)));
             var inner_scroll_top = pos * 200;
-            $("#left_cover_list .song_cover, #right_cover_list .song_cover").addClass("ease_scroll")
+            $("#left-cover-list .song_cover, #right-cover-list .song_cover").addClass("ease_scroll")
                 .css("-webkit-transform", "translateY(-" + inner_scroll_top + "px) translateZ(0)");
             setTimeout(function () {
-                $("#left_cover_list .song_cover, #right_cover_list .song_cover").removeClass("ease_scroll");
+                $("#left-cover-list .song_cover, #right-cover-list .song_cover").removeClass("ease_scroll");
             }, 800);
             lastScrollPosition = pos;
             return this;
         },
 
         /**
-         * Remove song covers animation
+         * Remove all song covers animation
          *
          * @method removeMusics
          * @param  {Function} callback
@@ -483,12 +539,12 @@ var ui = (function () {
          */
         removeMusics: function (callback) {
             music_now = {};
-            $("#left_cover_list .song_cover").addClass("ease_scroll")
+            $("#left-cover-list .song_cover").addClass("ease_scroll")
                 .css({
                     "-webkit-transform": "translateY(-" + ((coversRowNumber + 3) * 200) + "px) translateZ(0) scale(.8, .8)",
                     "opacity": 0
                 });
-            $("#right_cover_list .song_cover").addClass("ease_scroll")
+            $("#right-cover-list .song_cover").addClass("ease_scroll")
                 .css({
                     "-webkit-transform": "translateY(-" + ((coversRowNumber + 8) * 200) + "px) translateZ(0) scale(.8, .8)",
                     "opacity": 0
@@ -497,6 +553,10 @@ var ui = (function () {
                 callback();
             }, 800, callback);
             return this;
+        },
+
+        trashMusic: function () {
+            // TODO
         },
 
         /**
@@ -512,8 +572,8 @@ var ui = (function () {
             if(!expanded)
                 return false;
             expanded = false;
-            var left_lis = $("#left_cover_list .song_cover"),
-                right_lis = $("#right_cover_list .song_cover");
+            var left_lis = $("#left-cover-list .song_cover"),
+                right_lis = $("#right-cover-list .song_cover");
             $("#cover_control_icons").removeClass("play");
             if(expandId % 2) {
                 var left_pos = Math.floor(expandId / 2);
@@ -545,9 +605,9 @@ var ui = (function () {
          */
         expandInfoBar: function () {
             infoBarExpanded = true;
-            $("#tabbar_info_btn").addClass("expand");
+            $("#tabbar-info-btn").addClass("expand");
             setTimeout(function () {
-                $("#tabbar_info_btn").removeClass("uihover");
+                $("#tabbar-info-btn").removeClass("uihover");
             }, 500);
             return this;
         },
@@ -560,9 +620,9 @@ var ui = (function () {
          */
         closeInfoBar: function () {
             infoBarExpanded = false;
-            $("#tabbar_info_btn").removeClass("expand")
+            $("#tabbar-info-btn").removeClass("expand")
             setTimeout(function () {
-                $("#tabbar_info_btn").removeClass("uihover");
+                $("#tabbar-info-btn").removeClass("uihover");
             }, 500);
             return this;
         },
@@ -601,8 +661,8 @@ var ui = (function () {
         expandCover: function (id) {
             if(expanded)
                 return false;
-            var left_lis = $("#left_cover_list .song_cover"),
-                right_lis = $("#right_cover_list .song_cover");
+            var left_lis = $("#left-cover-list .song_cover"),
+                right_lis = $("#right-cover-list .song_cover");
             $("#cover_control_icons").addClass("play");
             var left_pos, right_pos;
             if(id % 2) {
@@ -633,28 +693,6 @@ var ui = (function () {
             expanded = true;
             expandId = id;
             setTimeout(retObject.expandInfoBar, 300);
-
-            /**
-             * window resize animation
-             *  a test
-             */
-            /*
-             if (macgap) {
-             $("#tableview").animate({
-             left: 0
-             }, 1000);
-             setTimeout(function () {
-             macgap.window.resize({
-             width: 400,
-             height: 400
-             });
-             macgap.window.move({
-             x: macgap.window.getX() + 100,
-             y: macgap.window.getY()
-             });
-             }, 1000);
-             }
-             */
 
             return retObject;
         },
@@ -783,25 +821,25 @@ var ui = (function () {
                 }).mouseleave(function (event) {
                     var btn_parent = $($("#tabbar .tabbar_icon")[3]);
                     btn_parent.removeClass("active").attr("data-active", "false");
-                    if($("#tabbar_info_btn").attr("data-click") !== "true")
-                        $("#tabbar_info_btn").removeClass("uihover");
+                    if($("#tabbar-info-btn").attr("data-click") !== "true")
+                        $("#tabbar-info-btn").removeClass("uihover");
                 }).mouseenter(function (event) {
-                    $("#tabbar_info_btn").addClass("uihover");
+                    $("#tabbar-info-btn").addClass("uihover");
                 }).click(function (event) {
-                    $("#tabbar_info_btn").attr("data-click", "true");
+                    $("#tabbar-info-btn").attr("data-click", "true");
                     setTimeout(function () {
-                        $("#tabbar_info_btn").attr("data-click", "false");
+                        $("#tabbar-info-btn").attr("data-click", "false");
                     }, 500);
                     if(moved) {
                         event.preventDefault();
                         return;
                     }
                     if (!retObject.expandCover(music_now_id)) {
-                        if (Math.floor(music_now_id / 2) == lastScrollPosition)
+                        if ((music_now_id >> 1) == lastScrollPosition)
                             retObject.toggleInfoBar();
                         else {
                             retObject.expandInfoBar();
-                            retObject.scrollToPos(Math.floor(music_now_id / 2));
+                            retObject.scrollToPos(music_now_id >> 1);
                         }
                     }
                 });
@@ -837,15 +875,14 @@ var ui = (function () {
          * Load content background animation
          *
          * @method loadContentBackground
-         * @param  {String} img_src
-         * @param  {} s // TODO
+         * @param  {String} img_src the url of image
+         * @param  {Boolean} s switch for changing background blending color
          * @return {Object} self
          */
         loadContentBackground: function (img_src, s) {
             if(!img_src)
                 return this;
             setTimeout(function () {
-                // removed  " #tabbar .tabbar_icon span "
                 $("#logo, #control_btns > div").addClass("drop_shadow");
                 $("#tableview").css("background", "rgba(0, 0, 0, .1)");
                 $("#content").addClass("blur_bg");
@@ -866,7 +903,7 @@ var ui = (function () {
          * Load content background shadow
          *
          * @method loadContentBackgroundShadow
-         * @param  {RGB Array} rgb
+         * @param  {Array} rgb the rgb color array
          * @return {Object} self
          */
         loadContentBackgroundShadow: function (rgb) {
@@ -878,7 +915,7 @@ var ui = (function () {
          * Change content background image
          *
          * @method changeContentBackground
-         * @param  {String} img_src, the image url
+         * @param  {String} img_src the image url
          * @return {Object} self
          */
         changeContentBackground: function (img_src) {
@@ -899,28 +936,18 @@ var ui = (function () {
          * @return {Object} self
          */
         loadMusicInfoRollingAnim: function () {
-            if(musicInfoInterval != null)
-                clearInterval(musicInfoInterval);
-            var move_func = function (span) {
-                var width = span[0].scrollWidth,
-                    c_width = span.width();
-                if(width <= c_width)
-                    return;
-                (musicInfoInterval = function (span) {
-                    span.animate({
-                        scrollLeft: (width - c_width) + "px"
-                    }, 3000, 'linear');
-                    setTimeout(function (span) {
-                        span.animate({
-                            scrollLeft: 0
-                        }, 3000, 'linear');
-                    }, 5000, span);
-                })(span);
-                setInterval(musicInfoInterval, 10000, span);
-            };
-            move_func($("#song_info_title"));
-            move_func($("#song_info_artist"));
-            move_func($("#album_title"));
+
+            // clear current animation(s)
+            if (musicInfoIntervals.length) {
+                for (inte in musicInfoIntervals) {
+                    clearInterval(musicInfoIntervals[inte]);
+                }
+                musicInfoIntervals = [];
+            }
+
+            autoMove($("#song_info_title"));
+            autoMove($("#song_info_artist"));
+            autoMove($("#album_title"));
             return this;
         },
 

@@ -120,7 +120,7 @@
     -webkit-transform: scale(1, 1);
   }
 }
-#login_form.play {
+#login-form.play {
   display: block;
   opacity: 0;
   -webkit-animation: form-load .4s .8s ease forwards;
@@ -165,15 +165,15 @@ ul#nav_list li.hide {
   opacity: 0;
   -webkit-transform: translateX(-50px) scale(.5, .5);
 }
-ul#left_cover_list li, ul#right_cover_list li {
+ul#left-cover-list li, ul#right-cover-list li {
   opacity: 1;
   -webkit-transform: translateX(0) scale(1, 1);
   -webkit-transition: -webkit-transform .7s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .7s ease, margin-top .7s ease, margin-left .7s ease, width .7s ease, height .7s ease;
 }
-ul#left_cover_list li.ease_scroll, ul#right_cover_list li.ease_scroll {
+ul#left-cover-list li.ease_scroll, ul#right-cover-list li.ease_scroll {
   -webkit-transition: -webkit-transform .8s ease-in-out, opacity .8s ease, margin-top .8s ease, margin-left .8s ease, width .8s ease, height .8s ease;
 }
-ul#left_cover_list li.hide, ul#right_cover_list li.hide {
+ul#left-cover-list li.hide, ul#right-cover-list li.hide {
   -webkit-transform: translateY(300px) scale(.8, .8) translateZ(0);
   opacity: 0;
 }
@@ -273,22 +273,22 @@ ul#left_cover_list li.hide, ul#right_cover_list li.hide {
 .song_progress_bar_inner {
   -webkit-transition: width 1s linear;
 }
-#login_form button {
+#login-form button {
   -webkit-transition: background .4s ease;
 }
 #cover_control_icons {
   -webkit-transition: bottom .5s ease;
 }
-#tabbar_info_btn {
+#tabbar-info-btn {
   -webkit-transition: all .5s ease;
 }
 #song_info {
   -webkit-transition: all .5s ease;
 }
-#tabbar #tabbar_info_btn #cover_control_icons {
+#tabbar #tabbar-info-btn #cover_control_icons {
   -webkit-transition: opacity .5s ease;
 }
-#tabbar #tabbar_info_btn #cover_control_icons svg {
+#tabbar #tabbar-info-btn #cover_control_icons svg {
   -webkit-transition: left .5s ease;
 }
 #tabbar .tabbar_icon span.icon_bg {
