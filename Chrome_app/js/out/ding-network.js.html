@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ding-network.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ding-network.js</h1>
+
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Created by dsds on 9/17/14.
+ */
+
+var api_domain = "http://www.douban.com/j/app";
+var musics = [];
+var channel_now = 0;
+
+var network = (function() {
+
+// private
+
+// public
+
+    var retObj = {
+
+        /**
+         * Preload next music list
+         *
+         * @method preloadMusic
+         * @return {Object} this
+         */
+        preloadMusic: function () {
+            return retObj;
+        },
+
+        /**
+         * Get musics in current channel.
+         * Call loadUserMusics if user have logged in.
+         *
+         * @method loadMusics
+         * @param  {Function} callback the callback function
+         * @return {Object} self
+         */
+        loadMusics: function (callback) {
+            if (authed) {
+                retObj.loadUserMusics(callback);
+                return;
+            }
+            $.ajax({
+                url: api_domain + "/radio/people?app_name=radio_desktop_win&amp;version=100&amp;channel=" + channel_now + "&amp;type=n"
+            }).done(function (data) {
+                musics = data["song"];
+                $.ajax({
+                    url: api_domain + "/radio/people?app_name=radio_desktop_win&amp;version=100&amp;channel=" + channel_now + "&amp;type=n"
+                }).done(function (data) {
+                    musics = musics.concat(data["song"]);
+                    callback();
+                });
+            });
+
+            return retObj;
+        },
+
+        /**
+         * Get musics for a logged-in user.
+         *
+         * @method loadUserMusics
+         * @param  {Function} callback the callback function
+         * @return {Object} self
+         */
+        loadUserMusics: function (callback) {
+            $.ajax({
+                url: api_domain + "/radio/people?app_name=radio_desktop_win&amp;version=100&amp;channel=" + channel_now + "&amp;type=n&amp;user_id=" + user_id + "&amp;expire=" + expire + "&amp;token=" + token
+            }).done(function (data) {
+                musics = data["song"];
+                if (channel_now == -3) {
+                    callback();
+                    return;
+                }
+                $.ajax({
+                    url: api_domain + "/radio/people?app_name=radio_desktop_win&amp;version=100&amp;channel=" + channel_now + "&amp;type=n&amp;user_id=" + user_id + "&amp;expire=" + expire + "&amp;token=" + token
+                }).done(function (data) {
+                    musics = musics.concat(data["song"]);
+                    callback();
+                });
+            });
+
+            return retObj;
+        },
+
+        /**
+         * Just load channels.
+         * Call loadUserChannels while user has logged in.
+         *
+         * @method loadChannels
+         * @param  {Function} callback the callback function
+         * @return {Object} self
+         */
+        loadChannels: function (callback) {
+            if (authed) {
+                retObj.loadUserChannels(callback);
+                return;
+            }
+            $.ajax({
+                url    : api_domain + "/radio/channels",
+                error  : function (data) {
+                    console.log("Error: ");
+                    console.log(data);
+                },
+                success: function (data) {
+                    channels = data["channels"];
+                    callback();
+                }
+            });
+            return retObj;
+        },
+
+        /**
+         * Load logged-in user's channels.
+         *
+         * @method loadUserChannels
+         * @param  {Function} callback the callback function
+         * @return {Object} self
+         */
+        loadUserChannels: function (callback) {
+            $.ajax({
+                url    : api_domain + "/radio/channels",
+                error  : function (data) {
+                    console.log("Error: ");
+                    console.log(data);
+                },
+                success: function (data) {
+                    channels = [
+                        {"name_en": "Heart Radio", "seq_id": 0, "abbr_en": "My", "name": "红心兆赫", "channel_id": -3}
+                    ];
+                    channels = channels.concat(data["channels"]);
+                    callback();
+                }
+            });
+        },
+
+        auth: function (email, password, callback) {
+            $.ajax({
+                url    : api_domain + "/login?app_name=radio_desktop_win&amp;version=100&amp;email=" + email + "&amp;password=" + password,
+                type   : "GET",
+                error  : function (data) {
+                    alert("登陆失败！请检查用户名以及密码。错误代码：" + data);
+                    console.log("Error: ");
+                    console.log(data);
+                },
+                success: function (data) {
+                    if (data["r"] == 0) {
+                        token = data["token"];
+                        expire = data["expire"];
+                        user_name = data["user_name"];
+                        user_email = data["email"];
+                        user_id = data["user_id"];
+                        authed = true;
+
+                        window.localStorage.authed = authed;
+                        window.localStorage.token = token;
+                        window.localStorage.expire = expire;
+                        window.localStorage.user_name = user_name;
+                        window.localStorage.user_email = user_email;
+                        window.localStorage.user_id = user_id;
+                    }
+                    $("#password").val("").hide();
+                    $("#login_btn").html("logout");
+
+                    retObj.loadChannels(callback);
+
+                }
+            });
+        },
+        post_end_of_song: function (sid) {
+            if (!authed)
+                return;
+
+            $.ajax({
+                url: api_domain + "/radio/people?app_name=radio_desktop_win&amp;version=100&amp;channel=" + channel_now + "&amp;type=e&amp;user_id=" + user_id + "&amp;expire=" + expire + "&amp;token=" + token + "&amp;sid=" + sid
+            }).done(function (data) {
+                console.log(data);
+            });
+        },
+        get_music_info: function (id, callback) {
+            /*
+             $.ajax({
+             url: "https://api.douban.com/v2/music/" + musics[id].aid,
+             type: "GET",
+             error: function (data) {
+             console.log("Error: ");
+             console.log(data);
+             },
+             success: function (data) {
+             musics[id].info = data;
+             if(musics[id].info.summary == "None")
+             musics[id].info.summary = "&lt;span style='text-align:center'>无详细信息&lt;/span>";
+             musics[id].info.summary = musics[id].info.summary.replace(/\\n/g, "&lt;br/>");
+             if(callback)
+             callback();
+             }
+             });
+             */
+            // return lyrics = =||
+            // info from douban is really a mess
+            $.ajax({
+                url    : "http://geci.me/api/lyric/" + musics[id].title + "/" + musics[id].artist,
+                type   : "GET",
+                error  : function (data) {
+                    musics[id].info = "未找到歌词 :(";
+                    if (callback)
+                        callback();
+                },
+                success: function (data) {
+                    if (data.count == 0) {
+                        musics[id].info = "未找到歌词 :(";
+                        if (callback)
+                            callback();
+                    } else {
+                        $.ajax({
+                            type   : "HEAD",
+                            url    : data.result[0].lrc,
+                            error  : function () {
+                                console.log("Lyrics 404");
+                                musics[id].info = "未找到歌词 :(";
+                                if (callback)
+                                    callback();
+                            },
+                            success: function () {
+                                $.ajax({
+                                    url    : data.result[0].lrc,
+                                    type   : "GET",
+                                    error  : function (data) {
+                                        musics[id].info = "未找到歌词 :(";
+                                        if (callback)
+                                            callback();
+                                    },
+                                    success: function (data) {
+                                        console.log(data);
+                                        data = data.replace(/\[(.*)\]/g, '').trim();
+                                        data = data.replace(/\n/g, '\n&lt;br />');
+                                        musics[id].info = data;
+                                        if (callback)
+                                            callback();
+                                    }
+                                });
+                            }
+                        }).done(function (data) {
+                            console.log(data);
+                        });
+                    }
+                }
+            });
+        },
+        update_music_like_info: function (sid, status) {
+            if (!authed)
+                return;
+
+            console.log(api_domain + "/radio/people?app_name=radio_desktop_win&amp;version=100&amp;channel=" + channel_now + "&amp;type=" + status + "&amp;user_id=" + user_id + "&amp;expire=" + expire + "&amp;token=" + token + "&amp;sid=" + sid);
+            $.ajax({
+                type: "GET",
+                url : api_domain + "/radio/people?app_name=radio_desktop_win&amp;version=100&amp;channel=" + channel_now + "&amp;type=" + status + "&amp;user_id=" + user_id + "&amp;expire=" + expire + "&amp;token=" + token + "&amp;sid=" + sid
+            }).done(function (data) {
+            });
+        }
+    };
+
+    return retObj;
+})();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#api_domain">api_domain</a></li><li><a href="global.html#changeContentBackground">changeContentBackground</a></li><li><a href="global.html#clearWaitingTime">clearWaitingTime</a></li><li><a href="global.html#closeExpandedCover">closeExpandedCover</a></li><li><a href="global.html#closeInfoBar">closeInfoBar</a></li><li><a href="global.html#closeLayer">closeLayer</a></li><li><a href="global.html#closeLogo">closeLogo</a></li><li><a href="global.html#closeLyrics">closeLyrics</a></li><li><a href="global.html#controller">controller</a></li><li><a href="global.html#expandCover">expandCover</a></li><li><a href="global.html#expandInfoBar">expandInfoBar</a></li><li><a href="global.html#getWaitingTime">getWaitingTime</a></li><li><a href="global.html#isExpanded">isExpanded</a></li><li><a href="global.html#loadBackgroundEffect">loadBackgroundEffect</a></li><li><a href="global.html#loadChannels">loadChannels</a></li><li><a href="global.html#loadColorThief">loadColorThief</a></li><li><a href="global.html#loadContentBackground">loadContentBackground</a></li><li><a href="global.html#loadContentBackgroundShadow">loadContentBackgroundShadow</a></li><li><a href="global.html#loadControlBtns">loadControlBtns</a></li><li><a href="global.html#loadLayer">loadLayer</a></li><li><a href="global.html#loadLogo">loadLogo</a></li><li><a href="global.html#loadMusicInfoRollingAnim">loadMusicInfoRollingAnim</a></li><li><a href="global.html#loadMusics">loadMusics</a></li><li><a href="global.html#loadNavigation">loadNavigation</a></li><li><a href="global.html#loadTabbar">loadTabbar</a></li><li><a href="global.html#loadTableview">loadTableview</a></li><li><a href="global.html#loadUserChannels">loadUserChannels</a></li><li><a href="global.html#loadUserMusics">loadUserMusics</a></li><li><a href="global.html#MMCQ">MMCQ</a></li><li><a href="global.html#preloadMusic">preloadMusic</a></li><li><a href="global.html#removeChannels">removeChannels</a></li><li><a href="global.html#removeMusics">removeMusics</a></li><li><a href="global.html#scrollToPos">scrollToPos</a></li><li><a href="global.html#toggleInfoBar">toggleInfoBar</a></li><li><a href="global.html#toggleLyrics">toggleLyrics</a></li><li><a href="global.html#wait">wait</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Oct 15 2014 06:52:19 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

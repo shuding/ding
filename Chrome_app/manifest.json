@@ -1,0 +1,17 @@
+{
+    "name": "Ding",
+    "description": "Ding the douban FM music app.",
+    "version": "0.1",
+    "manifest_version": 2,
+    "permissions": [
+        "http://*.douban.com/",
+        "http://img3.douban.com/"
+        "http://geci.me/",
+        "http://localhost/"
+    ],
+    "app": {
+        "background": {
+            "scripts": ["background.js"]
+        }
+    }
+}

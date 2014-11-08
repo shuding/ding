@@ -1,0 +1,319 @@
+/*
+* This is the animation controller CSS file of Ding.app
+* Create by quietshu@gmail.com at 2014.9.14
+* */
+@-webkit-keyframes move-up-fade-in {
+  0% {
+    -webkit-transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes move-up-fade-in-out {
+  0% {
+    -webkit-transform: translateY(50px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes scale-rotate-in {
+  0% {
+    -webkit-transform: scale(0, 0);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+}
+@-webkit-keyframes move-up-in-full {
+  0% {
+    top: 100%;
+  }
+  100% {
+    top: 0%;
+  }
+}
+@-webkit-keyframes move-right-in {
+  0% {
+    -webkit-transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes set_bg_color {
+  0% {
+    background: #fff;
+  }
+  100% {
+    background: #A7A7A7;
+  }
+}
+@-webkit-keyframes press-down {
+  0% {
+    -webkit-filter: none;
+  }
+  50% {
+    -webkit-filter: brightness(.8);
+  }
+  100% {
+    -webkit-filter: none;
+  }
+}
+@-webkit-keyframes rotate_360 {
+  0% {
+    -webkit-transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes layer-expand {
+  0% {
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+  }
+  50% {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+  }
+  100% {
+    width: 100%;
+    height: 400px;
+    line-height: 700px;
+  }
+}
+@-webkit-keyframes form-load {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes heart-beat {
+  0% {
+    -webkit-transform: scale(1, 1);
+  }
+  20% {
+    -webkit-transform: scale(1.1, 1.1);
+  }
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+}
+#login-form.play {
+  display: block;
+  opacity: 0;
+  -webkit-animation: form-load .4s .8s ease forwards;
+}
+h1#logo.layer {
+  background-color: rgba(255, 255, 255, .9);
+  -webkit-animation: layer-expand .8s ease forwards;
+}
+h1#logo.play span:nth-of-type(1) {
+  -webkit-animation: move-up-fade-in-out 2s cubic-bezier(0.135, 0.785, 0.86, 0.15) forwards;
+}
+h1#logo.play span:nth-of-type(2) {
+  -webkit-animation: move-up-fade-in-out 2s .1s cubic-bezier(0.135, 0.785, 0.86, 0.15) forwards;
+}
+h1#logo.play span:nth-of-type(3) {
+  -webkit-animation: move-up-fade-in-out 2s .2s cubic-bezier(0.135, 0.785, 0.86, 0.15) forwards;
+}
+h1#logo.play span:nth-of-type(4) {
+  -webkit-animation: move-up-fade-in-out 2s .3s cubic-bezier(0.135, 0.785, 0.86, 0.15) forwards;
+}
+h1#logo.fix span:nth-of-type(4) {
+  -webkit-animation: move-right-in .8s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+h1#logo.fix span:nth-of-type(3) {
+  -webkit-animation: move-right-in .8s .05s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+h1#logo.fix span:nth-of-type(2) {
+  -webkit-animation: move-right-in .8s .1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+h1#logo.fix span:nth-of-type(1) {
+  -webkit-animation: move-right-in .8s .15s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+#content #background.play {
+  -webkit-animation: move-up-in-full .8s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+ul#nav_list li {
+  opacity: 1;
+  -webkit-transform: translateX(0) scale(1, 1) translateZ(0);
+  -webkit-transition: -webkit-transform .8s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .8s ease, background .4s ease;
+}
+ul#nav_list li.hide {
+  opacity: 0;
+  -webkit-transform: translateX(-50px) scale(.5, .5);
+}
+ul#left-cover-list li, ul#right-cover-list li {
+  opacity: 1;
+  -webkit-transform: translateX(0) scale(1, 1);
+  -webkit-transition: -webkit-transform .7s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .7s ease, margin-top .7s ease, margin-left .7s ease, width .7s ease, height .7s ease;
+}
+ul#left-cover-list li.ease_scroll, ul#right-cover-list li.ease_scroll {
+  -webkit-transition: -webkit-transform .8s ease-in-out, opacity .8s ease, margin-top .8s ease, margin-left .8s ease, width .8s ease, height .8s ease;
+}
+ul#left-cover-list li.hide, ul#right-cover-list li.hide {
+  -webkit-transform: translateY(300px) scale(.8, .8) translateZ(0);
+  opacity: 0;
+}
+#tableview {
+  -webkit-transition: -webkit-transform .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  -webkit-transform: scale(0, 0);
+}
+#tableview.play {
+  -webkit-transform: scale(1, 1);
+}
+#tabbar {
+  -webkit-transition: -webkit-transform .5s cubic-bezier(0.075, 0.82, 0.165, 1), opacity .5s ease;
+  -webkit-transform: translateX(100px) translateZ(0);
+  opacity: 0;
+}
+#tabbar.play {
+  -webkit-transform: translateX(0) translateZ(0);
+  opacity: 1;
+}
+#tabbar .tabbar_icon span {
+  -webkit-transition: all .3s ease;
+}
+#control_btns div {
+  -webkit-transition: background .2s ease, -webkit-transform .3s cubic-bezier(.85,-0.19,.58,1.67);
+  -webkit-transform: scale(0, 0) rotateZ(90deg);
+}
+#control_btns div.play {
+  -webkit-transform: scale(1, 1) rotateZ(0);
+}
+#control_btns svg path, #control_btns svg text {
+  -webkit-transition: fill .2s ease;
+}
+#control_btns div:active {
+  background: rgba(0, 31, 63, 0.6);
+}
+#control_btns div.drop_shadow:active {
+  -webkit-filter: none;
+}
+#control_btns div:active path, #control_btns div:active text {
+  fill: #fff;
+}
+#content #background.blur_bg {
+  -webkit-transition: background-color .5s ease;
+  -webkit-animation: move-up-fade-in .8s .2s ease forwards;
+}
+#content.blur_bg {
+  background: #fff;
+  -webkit-animation: set_bg_color .5s .8s ease forwards;
+}
+#prev_next_btn svg {
+  -webkit-transition: width .5s ease, margin-left .5s ease;
+}
+.song_cover.pressdown {
+  -webkit-animation: press-down .5s ease forwards;
+}
+#play_btn svg path {
+  -webkit-transform-origin: center;
+  -webkit-transition: opacity .3s ease, fill .3s ease, -webkit-transform .3s ease;
+}
+#play_mode_btn svg {
+  -webkit-transform-origin: center;
+  -webkit-transition: opacity .3s ease, -webkit-transform .3s ease;
+}
+.play_mode_0 svg#queue {
+  -webkit-transform: scale(1, 1) rotateZ(0);
+  opacity: 1;
+}
+.play_mode_0 svg#circular {
+  -webkit-transform: scale(0, 0) rotateZ(30deg);
+}
+.play_mode_0 svg#shuffle {
+  -webkit-transform: scale(0, 0) rotateZ(30deg);
+}
+.play_mode_1 svg#queue {
+  -webkit-transform: scale(0, 0) rotateZ(30deg);
+}
+.play_mode_1 svg#circular {
+  -webkit-transform: scale(1, 1) rotateZ(0);
+  opacity: 1;
+}
+.play_mode_1 svg#shuffle {
+  -webkit-transform: scale(0, 0) rotateZ(30deg);
+}
+.play_mode_2 svg#queue {
+  -webkit-transform: scale(0, 0) rotateZ(30deg);
+}
+.play_mode_2 svg#circular {
+  -webkit-transform: scale(0, 0) rotateZ(30deg);
+}
+.play_mode_2 svg#shuffle {
+  -webkit-transform: scale(1, 1) rotateZ(0);
+  opacity: 1;
+}
+.song_progress_bar {
+  -webkit-transition: background-color .5s linear;
+}
+.song_progress_bar_inner {
+  -webkit-transition: width 1s linear;
+}
+#login-form button {
+  -webkit-transition: background .4s ease;
+}
+#cover_control_icons {
+  -webkit-transition: bottom .5s ease;
+}
+#tabbar-info-btn {
+  -webkit-transition: all .5s ease;
+}
+#song_info {
+  -webkit-transition: all .5s ease;
+}
+#tabbar #tabbar-info-btn #cover_control_icons {
+  -webkit-transition: opacity .5s ease;
+}
+#tabbar #tabbar-info-btn #cover_control_icons svg {
+  -webkit-transition: left .5s ease;
+}
+#tabbar .tabbar_icon span.icon_bg {
+  -webkit-transition: background-color .5s ease, box-shadow .5s ease;
+}
+#star path {
+  -webkit-transition: opacity .2s ease;
+}
+#star_bg:before, #star_bg:after {
+  -webkit-transition: opacity .2s ease, -webkit-transform .5s ease;
+}
+#tabbar .tabbar_icon .star-1 span#star_bg.icon_bg:hover:before {
+  opacity: 1;
+  -webkit-transform: rotateZ(45deg);
+}
+#tabbar .tabbar_icon .star-1 span#star_bg.icon_bg:hover:after {
+  opacity: 1;
+  -webkit-transform: rotateZ(-45deg);
+}
+.star-1 #star {
+  -webkit-animation: heart-beat 1.2s ease infinite;
+}
+#album_info {
+  -webkit-transition: opacity .5s ease, padding-top .8s ease, top .5s ease;
+}
+#extra_info {
+  -webkit-transition: opacity .5s ease, right .5s ease;
+}

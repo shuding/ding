@@ -1,0 +1,28 @@
+{
+    "main": "public/index.html",
+    "name": "Ding",
+    "description": "",
+    "version": "1.0.0",
+    "plugins" : {
+                "Dock":"Dock",
+                "Dialog":"Dialog",
+                "Fonts" : "Fonts",
+                "Clipboard":"Clipboard",
+                "StatusItem":"StatusItem",
+                "Task" : "Task",
+                "Sound" : "Sound",
+                "Defaults" : "Defaults",
+                "File" : "File"
+                 },
+    "window" : {
+        "title" : "Ding",
+        "width" : 600,
+        "height" : 400,
+        "position": "center",
+        "min_width": 400,
+        "min_height": 200,
+        "max_width": 1200,
+        "max_height": 800
+    }
+  
+}
